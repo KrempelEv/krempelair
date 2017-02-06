@@ -42,9 +42,9 @@ def air_set_status(pin,state):
     # state 1
     #b0ß000001
     pins = digiOut()
-    status = sys_status(0x22)
-    pins.setValue(0x22, pin, state)
-    status = sys_status(0x22)
+    status = sys_status(0x20)
+    pins.setValue(0x20, pin, state)
+    status = sys_status(0x20)
     r = make_response(json.dumps(status, indent=4),200)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r
