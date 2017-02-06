@@ -15,12 +15,15 @@ from lib.bus.digitalOut import digiOut
 
 def sys_status(address):
     pins = digiOut()
-    stateMsg = {0: "aus",
-                5: "zuluft-stufe:1 / fortluft-stufe:1",
-                7: "zuluft-stufe:2 / fortluft-stufe:1",
-                15: "zuluft-stufe:2 / fortluft-stufe:2"}
-    status = pins.getValue(address)
-    return {"msg":stateMsg[status],"code": status, "bin": "{0:#b}".format(status)}
+    try:
+        stateMsg = {0: "aus",
+                    5: "zuluft-stufe:1 / fortluft-stufe:1",
+                    7: "zuluft-stufe:2 / fortluft-stufe:1",
+                    15: "zuluft-stufe:2 / fortluft-stufe:2"}
+        status = pins.getValue(address)
+        return {"msg":stateMsg[status],"code": status, "bin": "{0:#b}".format(status)}
+    except:
+        return {"msg":"unknown","code": status, "bin": "{0:#b}".format(status)}
 
 
 def air_get_status():
