@@ -15,7 +15,7 @@ from lib.bus.digitalOut import digiOut
 
 
 
-def air_get_status(pin,state):
+def air_get_status():
     """"""
     #digitalOut.setValue(0x20,0,value)
     pins = digiOut()
