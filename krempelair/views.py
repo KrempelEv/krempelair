@@ -18,8 +18,13 @@ from lib.bus.digitalOut import digiOut
 def air_get_status():
     """"""
     #digitalOut.setValue(0x20,0,value)
+    stateMsg = {"0": "aus",
+                "5": "zuluft-stufe:1 / fortluft-stufe:1",
+                "7": "zuluft-stufe:2 / fortluft-stufe:1",
+                "15": "zuluft-stufe:2 / fortluft-stufe:2"}
     pins = digiOut()
-    status = {"msg":"running","code":pins.getValue(0x21)}
+    status = pins.getValue(0x21)
+    status = {"msg":stateMsg[status],"code":status}
     r = make_response(json.dumps(status, indent=4),200)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r

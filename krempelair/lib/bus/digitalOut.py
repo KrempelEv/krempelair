@@ -35,8 +35,8 @@ class digiOut():
 
     def setValue(self, address, pin, state):
         if state == 1:
-    	       self._o1 = self.__set_bit(o1,pin)
+    	       self._o1 = self.__set_bit(self._o1,pin)
         else:
-    	       self._o1 = self.__clear_bit(o1,pin)
+    	       self._o1 = self.__clear_bit(self._o1,pin)
 
         self._bus.write_byte(address,255-self._o1)
