@@ -21,12 +21,12 @@ class digiOut():
         self._o1 = 0
 
     #Funktion Setze Bit in Variable / Function Set Bit in byte
-    def __set_bit(self, value, bit):
+    def __set_bit(self, bit, value):
         log.debug(value | (1<<bit))    #Ausgabe in der Python Shell
         return value | (1<<bit)
 
     #Funktion ruecksetzte Bit in Variable / Function reset Bit in byte
-    def __clear_bit(self, value, bit):
+    def __clear_bit(self, bit, value):
         log.debug(value & ~(1<<bit))    #Ausgabe in der Python Shell
         return value & ~(1<<bit)        #Funktion Setze Bit in Variable / Function Set Bit in byte
 
