@@ -39,7 +39,7 @@ class Krempelair(flask.Flask):
 
     def setup_routes(self):
         for endpoint, rule in [
-            ('air_status',   '/<int:inp>'),
+            ('air_status',   '/<int:pin>/<int:state>'),
 
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
