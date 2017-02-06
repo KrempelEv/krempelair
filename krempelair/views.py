@@ -13,18 +13,19 @@ from flask.views import View
 from lib.bus.digitalOut import digiOut
 
 
+def sys_status():
+    pins = digiOut()
+    stateMsg = {0: "aus",
+                5: "zuluft-stufe:1 / fortluft-stufe:1",
+                7: "zuluft-stufe:2 / fortluft-stufe:1",
+                15: "zuluft-stufe:2 / fortluft-stufe:2"}
+    status = pins.getValue(0x21)
+    return {"msg":stateMsg[status],"code": status, "bin": "{0:#b}".format(status)}
 
 
 def air_get_status():
     """"""
-    #digitalOut.setValue(0x20,0,value)
-    stateMsg = {"0": "aus",
-                "5": "zuluft-stufe:1 / fortluft-stufe:1",
-                "7": "zuluft-stufe:2 / fortluft-stufe:1",
-                "15": "zuluft-stufe:2 / fortluft-stufe:2"}
-    pins = digiOut()
-    status = str(int(pins.getValue(0x21)))
-    status = {"msg":stateMsg[status],"code":status}
+    status = sys_status()
     r = make_response(json.dumps(status, indent=4),200)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r
@@ -34,7 +35,8 @@ def air_set_status(pin,state):
     """"""
     #digitalOut.setValue(0x20,0,value)
     pins = digiOut()
-    status = {"msg":"running","code":pins.setValue(0x20,pin,state)}
+    pins.setValue(0x20,pin,state)
+    status = sys_status()
     r = make_response(json.dumps(status, indent=4),200)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r
