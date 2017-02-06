@@ -23,7 +23,7 @@ def air_get_status():
                 "7": "zuluft-stufe:2 / fortluft-stufe:1",
                 "15": "zuluft-stufe:2 / fortluft-stufe:2"}
     pins = digiOut()
-    status = pins.getValue(0x21)
+    status = str(int(pins.getValue(0x21)))
     status = {"msg":stateMsg[status],"code":status}
     r = make_response(json.dumps(status, indent=4),200)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
