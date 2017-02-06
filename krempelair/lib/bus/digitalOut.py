@@ -13,29 +13,30 @@
 import smbus
 import logging as log
 
-bus = smbus.SMBus(1)
 
-o1 = 0
+class digiOut():
 
-#Funktion Setze Bit in Variable / Function Set Bit in byte
-def __set_bit(value, bit):
-    log.debug(value | (1<<bit))    #Ausgabe in der Python Shell
-    return value | (1<<bit)
+    def __init__(self):
+        self._bus = smbus.SMBus(1)
+        self._o1 = 0
 
-#Funktion ruecksetzte Bit in Variable / Function reset Bit in byte
-def __clear_bit(value, bit):
-    log.debug(value & ~(1<<bit))    #Ausgabe in der Python Shell
-    return value & ~(1<<bit)#Funktion Setze Bit in Variable / Function Set Bit in byte
+    #Funktion Setze Bit in Variable / Function Set Bit in byte
+    def __set_bit(self, value, bit):
+        log.debug(value | (1<<bit))    #Ausgabe in der Python Shell
+        return value | (1<<bit)
 
-def getValue(address, pin):
-    global o1
-    return bus.read_byte_data(address,(1<<pin))
+    #Funktion ruecksetzte Bit in Variable / Function reset Bit in byte
+    def __clear_bit(self, value, bit):
+        log.debug(value & ~(1<<bit))    #Ausgabe in der Python Shell
+        return value & ~(1<<bit)#Funktion Setze Bit in Variable / Function Set Bit in byte
 
+    def getValue(self, address):
+        return (255 - self._bus.read_byte_data(address,255))
 
-def setValue(address, pin, state):
-    global o1
-    if state == 1:
-	o1 = __set_bit(o1,pin)
-    else:
-	o1 = __clear_bit(o1,pin)
-    bus.write_byte(address,255-o1)
+    def setValue(self, address, pin, state):
+        if state == 1:
+    	       self._o1 = self.__set_bit(o1,pin)
+        else:
+    	       self._o1 = self.__clear_bit(o1,pin)
+
+        self._bus.write_byte(address,255-self._o1)
