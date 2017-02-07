@@ -41,6 +41,7 @@ class Krempelair(flask.Flask):
         for endpoint, rule in [
             ('air_get_status',   '/'),
             ('air_set_status',   '/<int:pin>/<int:state>'),
+            ('air_off', '/off'),
 
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
