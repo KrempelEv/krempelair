@@ -44,7 +44,7 @@ def sys_status_betrieb():
         stateMsg["7"] = "1"
     return stateMsg
 
-def sys_status_stoerungen():
+def sys_status_stoerung():
     """"""
     pins = digiOut()
     stateMsg = {"AL0": "0",
