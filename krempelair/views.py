@@ -11,12 +11,12 @@ from flask import request, render_template, current_app, url_for, make_response
 from flask.views import View
 
 from lib.jsonApi import api_response
-from lib.bus.digitalOut import digiOut
+from lib.bus.digitalInOut import digiInOut
 
 
 def sys_status_betrieb():
     """"""
-    pins = digiOut()
+    pins = digiInOut()
     stateMsg = {"ZUL St1": "0",
                 "ZUL St2": "0",
                 "FOL St1": "0",
@@ -46,7 +46,7 @@ def sys_status_betrieb():
 
 def sys_status_stoerung():
     """"""
-    pins = digiOut()
+    pins = digiInOut()
     stateMsg = {"AL0": "0",
                 "AL1": "0",
                 "AL2": "0",
@@ -89,7 +89,7 @@ def air_get_status_betrieb():
 
 def air_set_status(pin,state):
     """"""
-    pins = digiOut()
+    pins = digiInOut()
     pins.setValue(0x20, pin, state)
     status = sys_status_betrieb()
     r =api_response(status,304)
