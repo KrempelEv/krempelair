@@ -10,6 +10,7 @@ import smbus
 from flask import request, render_template, current_app, url_for, make_response
 from flask.views import View
 
+from lib.jsonApi import api_response
 from lib.bus.digitalOut import digiOut
 
 
@@ -76,17 +77,14 @@ def sys_status_stoerungen():
 def air_get_status_stoerung():
     """"""
     status = sys_status_stoerung()
-    r = make_response(json.dumps(status, indent=4),200)
-    r.headers["Content-Type"] = "application/json; charset=utf-8"
-    return r
+    return api_response(status)
 
 
 def air_get_status_betrieb():
     """"""
     status = sys_status_betrieb()
-    r = make_response(json.dumps(status, indent=4),200)
-    r.headers["Content-Type"] = "application/json; charset=utf-8"
-    return r
+
+    return api_response(status)
 
 
 def air_set_status(pin,state):
@@ -94,9 +92,8 @@ def air_set_status(pin,state):
     pins = digiOut()
     pins.setValue(0x20, pin, state)
     status = sys_status_betrieb()
-    r = make_response(json.dumps(status, indent=4),303)
+    r =api_response(status,304)
     r.headers["Location"] = "/"
-    r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r
 
 def air_off():
