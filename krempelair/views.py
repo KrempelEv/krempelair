@@ -45,6 +45,7 @@ def air_set_status(pin,state):
     status = sys_status(0x20)
     pins.setValue(0x20, pin, state)
     status = sys_status(0x20)
-    r = make_response(json.dumps(status, indent=4),200)
+    r = make_response(json.dumps(status, indent=4),303)
+    r.headers["Location"] = "/"
     r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r
