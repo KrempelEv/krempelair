@@ -39,7 +39,8 @@ class Krempelair(flask.Flask):
 
     def setup_routes(self):
         for endpoint, rule in [
-            ('air_get_status',   '/'),
+            ('air_get_status_betrieb',   '/'),
+            ('air_get_status_stoerung',   '/stoerung'),
             ('air_set_status',   '/<int:pin>/<int:state>'),
             ('air_off', '/off'),
 
