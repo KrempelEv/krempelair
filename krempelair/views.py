@@ -49,3 +49,8 @@ def air_set_status(pin,state):
     r.headers["Location"] = "/"
     r.headers["Content-Type"] = "application/json; charset=utf-8"
     return r
+
+def air_off():
+    """"""
+    air_set_status(0,0)
+    return air_set_status(1,0)
