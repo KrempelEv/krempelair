@@ -73,8 +73,15 @@ def sys_status_stoerungen():
         stateMsg["AL7"] = "1"
     return stateMsg
 
+def air_get_status_stoerung():
+    """"""
+    status = sys_status_stoerung()
+    r = make_response(json.dumps(status, indent=4),200)
+    r.headers["Content-Type"] = "application/json; charset=utf-8"
+    return r
 
-def air_get_status():
+
+def air_get_status_betrieb():
     """"""
     status = sys_status_betrieb()
     r = make_response(json.dumps(status, indent=4),200)
