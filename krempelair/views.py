@@ -17,8 +17,8 @@ def sys_status_betrieb():
     """"""
     pins = digiOut()
     stateMsg = {"ZUL St1": "0",
-                "FOL St1": "0",
                 "ZUL St2": "0",
+                "FOL St1": "0",
                 "FOL St2": "0",
                 "LE PU": "0",
                 "5": "0",
@@ -28,9 +28,9 @@ def sys_status_betrieb():
     if status&1 != 0:
         stateMsg["ZUL St1"] = "1"
     if status&2 != 0:
-        stateMsg["FOL St1"] = "1"
-    if status&4 != 0:
         stateMsg["ZUL St2"] = "1"
+    if status&4 != 0:
+        stateMsg["FOL St1"] = "1"
     if status&8 != 0:
         stateMsg["FOL St2"] = "1"
     if status&16 == 0:  # LE PU ist invertiert
@@ -92,9 +92,8 @@ def air_get_status_betrieb():
 def air_set_status(pin,state):
     """"""
     pins = digiOut()
-    status = sys_status(0x20)
     pins.setValue(0x20, pin, state)
-    status = sys_status(0x20)
+    status = sys_status_betrieb()
     r = make_response(json.dumps(status, indent=4),303)
     r.headers["Location"] = "/"
     r.headers["Content-Type"] = "application/json; charset=utf-8"
