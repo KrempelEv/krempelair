@@ -10,7 +10,7 @@ def api_response(responseObj, httpStatus=200):
 
     Keyword arguments:
     responseObj -- Python Object
-    httpStatus -- HTTP Response Code (default 0.0)
+    httpStatus -- HTTP Response Code (default: 200 [OK])
     """
     r = make_response(json.dumps(responseObj, indent=4),httpStatus)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
