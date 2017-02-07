@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-    krempelair.lib.bus.digitalOut
+    krempelair.lib.bus.digitalInOut
 
     Simple Wraper Libary
 
@@ -14,7 +14,7 @@ import smbus
 import logging as log
 
 
-class digiOut():
+class digiInOut():
 
     def __init__(self):
         self._bus = smbus.SMBus(1)
