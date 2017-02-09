@@ -97,16 +97,6 @@ def air_set_status(pin,state):
     return r
 
 
-def air_off():
-    """"""
-    air_set_status(0,0)
-    air_set_status(1,0)
-    status = sys_status_betrieb()
-    r =api_response(status,304)
-    r.headers["Location"] = "/"
-    return r
-
-
 def air_set_level(level):
     """"""
     if(level == 0):
@@ -118,6 +108,24 @@ def air_set_level(level):
     if(level == 2):
         air_set_status(0,1)
         air_set_status(1,1)
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
+
+
+def air_set_timer(time):
+    """"""
+    print time
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
+
+
+def air_set_temp(temp):
+    """"""
+    print temp
     status = sys_status_betrieb()
     r =api_response(status,304)
     r.headers["Location"] = "/"
