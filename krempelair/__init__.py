@@ -42,8 +42,9 @@ class Krempelair(flask.Flask):
             ('air_get_status_betrieb',   '/'),
             ('air_get_status_stoerung',   '/stoerung'),
             ('air_set_status',   '/<int:pin>/<int:state>'),
-            ('air_off', '/lueftung/stop'),
-            ('air_set_level', '/lueftung/start/<int:level>'),
+            ('air_set_level', '/lueftung/status/<int:level>'),
+            ('air_set_timer', '/lueftung/timer/<int:time>'),
+            ('air_set_temp', '/lueftung/temperatur/<int:temp>'),
             ('air_set_raucherraum_on', '/raucherraum/on'),
             ('air_set_raucherraum_off', '/raucherraum/off'),
 
