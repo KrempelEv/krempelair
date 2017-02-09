@@ -42,7 +42,11 @@ class Krempelair(flask.Flask):
             ('air_get_status_betrieb',   '/'),
             ('air_get_status_stoerung',   '/stoerung'),
             ('air_set_status',   '/<int:pin>/<int:state>'),
-            ('air_off', '/off'),
+            ('air_off', '/lueftung/stop'),
+            ('air_set_level_1', '/lueftung/start/1'),
+            ('air_set_level_2', '/lueftung/start/2'),
+            ('air_set_raucherraum_on', '/raucherraum/on'),
+            ('air_set_raucherraum_off', '/raucherraum/off'),
 
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
