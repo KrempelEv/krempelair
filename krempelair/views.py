@@ -100,19 +100,31 @@ def air_set_status(pin,state):
 def air_off():
     """"""
     air_set_status(0,0)
-    return air_set_status(1,0)
+    air_set_status(1,0)
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
 
 
 def air_set_level_1():
     """"""
     air_set_status(0,1)
-    return air_set_status(1,0)
+    air_set_status(1,0)
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
 
 
 def air_set_level_2():
     """"""
     air_set_status(0,1)
-    return air_set_status(1,1)
+    air_set_status(1,1)
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
 
 
 def air_set_raucherraum_on():
