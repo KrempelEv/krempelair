@@ -14,4 +14,5 @@ def api_response(responseObj, httpStatus=200):
     """
     r = make_response(json.dumps(responseObj, indent=4),httpStatus)
     r.headers["Content-Type"] = "application/json; charset=utf-8"
+    r.headers["Access-Control-Allow-Origin"] = "*"
     return r
