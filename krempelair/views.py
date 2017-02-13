@@ -83,7 +83,6 @@ def air_get_status_stoerung():
 def air_get_status_betrieb():
     """"""
     status = sys_status_betrieb()
-
     return api_response(status)
 
 
@@ -109,8 +108,7 @@ def air_set_level(level):
         air_set_status(0,1)
         air_set_status(1,1)
     status = sys_status_betrieb()
-    r =api_response(status,304)
-    r.headers["Location"] = "/"
+    r =api_response(status,200)
     return r
 
 
@@ -118,8 +116,7 @@ def air_set_timer(time):
     """"""
     print time
     status = sys_status_betrieb()
-    r =api_response(status,304)
-    r.headers["Location"] = "/"
+    r =api_response(status,200)
     return r
 
 
@@ -127,8 +124,7 @@ def air_set_temp(temp):
     """"""
     print temp
     status = sys_status_betrieb()
-    r =api_response(status,304)
-    r.headers["Location"] = "/"
+    r =api_response(status,200)
     return r
 
 
