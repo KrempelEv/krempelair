@@ -17,61 +17,61 @@ from lib.bus.digitalInOut import digiInOut
 def sys_status_betrieb():
     """"""
     pins = digiInOut()
-    stateMsg = {"ZUL_St1": false,
-                "ZUL_St2": false,
-                "FOL_St1": false,
-                "FOL_St2": false,
-                "LE_PU": false,
-                "5": false,
-                "6": false,
-                "7": false}
+    stateMsg = {"ZUL_St1": False,
+                "ZUL_St2": False,
+                "FOL_St1": False,
+                "FOL_St2": False,
+                "LE_PU": False,
+                "5": False,
+                "6": False,
+                "7": False}
     status = pins.getValue(0x21)
     if status&1 != 0:
-        stateMsg["ZUL_St1"] = true
+        stateMsg["ZUL_St1"] = True
     if status&2 != 0:
-        stateMsg["ZUL_St2"] = true
+        stateMsg["ZUL_St2"] = True
     if status&4 != 0:
-        stateMsg["FOL_St1"] = true
+        stateMsg["FOL_St1"] = True
     if status&8 != 0:
-        stateMsg["FOL_St2"] = true
+        stateMsg["FOL_St2"] = True
     if status&16 != 0:
-        stateMsg["LE_PU"] = true
+        stateMsg["LE_PU"] = True
     if status&32 != 0:
-        stateMsg["5"] = true
+        stateMsg["5"] = True
     if status&64 != 0:
-        stateMsg["6"] = true
+        stateMsg["6"] = True
     if status&128 != 0:
-        stateMsg["7"] = true
+        stateMsg["7"] = True
     return stateMsg
 
 def sys_status_stoerung():
     """"""
     pins = digiInOut()
-    stateMsg = {"Quit": false,
-                "Sammelalarm": false,
-                "Frost": false,
-                "Stroem_ZUL": false,
-                "Stroem_FOL": false,
-                "AL5": false,
-                "AL6": false,
-                "AL7": false}
+    stateMsg = {"Quit": False,
+                "Sammelalarm": False,
+                "Frost": False,
+                "Stroem_ZUL": False,
+                "Stroem_FOL": False,
+                "AL5": False,
+                "AL6": False,
+                "AL7": False}
     status = pins.getValue(0x22)
     if status&1 != 0:
-        stateMsg["Quit"] = true
+        stateMsg["Quit"] = True
     if status&2 != 0:
-        stateMsg["Sammelalarm"] = true
+        stateMsg["Sammelalarm"] = True
     if status&4 != 0:
-        stateMsg["Frost"] = true
+        stateMsg["Frost"] = True
     if status&8 != 0:
-        stateMsg["Stroem_ZUL"] = true
+        stateMsg["Stroem_ZUL"] = True
     if status&16 != 0:
-        stateMsg["Stroem_FOL"] = true
+        stateMsg["Stroem_FOL"] = True
     if status&32 != 0:
-        stateMsg["AL5"] = true
+        stateMsg["AL5"] = True
     if status&64 != 0:
-        stateMsg["AL6"] = true
+        stateMsg["AL6"] = True
     if status&128 != 0:
-        stateMsg["AL7"] = true
+        stateMsg["AL7"] = True
     return stateMsg
 
 def air_get_status_stoerung():
