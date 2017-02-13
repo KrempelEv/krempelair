@@ -34,7 +34,7 @@ def sys_status_betrieb():
         stateMsg["FOL St1"] = "1"
     if status&8 != 0:
         stateMsg["FOL St2"] = "1"
-    if status&16 == 0:  # LE PU ist invertiert
+    if status&16 != 0:
         stateMsg["LE PU"] = "1"
     if status&32 != 0:
         stateMsg["5"] = "1"
@@ -47,25 +47,25 @@ def sys_status_betrieb():
 def sys_status_stoerung():
     """"""
     pins = digiInOut()
-    stateMsg = {"AL0": "0",
-                "AL1": "0",
-                "AL2": "0",
-                "AL3": "0",
-                "AL4": "0",
+    stateMsg = {"Quit": "0",
+                "Sammelalarm": "0",
+                "Frost": "0",
+                "StroemZul": "0",
+                "StroemFol": "0",
                 "AL5": "0",
                 "AL6": "0",
                 "AL7": "0"}
     status = pins.getValue(0x22)
     if status&1 != 0:
-        stateMsg["AL0"] = "1"
+        stateMsg["Quit"] = "1"
     if status&2 != 0:
-        stateMsg["AL1"] = "1"
+        stateMsg["Sammelalarm"] = "1"
     if status&4 != 0:
-        stateMsg["AL2"] = "1"
+        stateMsg["Frost"] = "1"
     if status&8 != 0:
-        stateMsg["AL3"] = "1"
+        stateMsg["StroemZul"] = "1"
     if status&16 != 0:
-        stateMsg["AL4"] = "1"
+        stateMsg["StroemFol"] = "1"
     if status&32 != 0:
         stateMsg["AL5"] = "1"
     if status&64 != 0:
@@ -96,7 +96,47 @@ def air_set_status(pin,state):
     r.headers["Location"] = "/"
     return r
 
-def air_off():
+
+def air_set_level(level):
     """"""
-    air_set_status(0,0)
-    return air_set_status(1,0)
+    if(level == 0):
+        air_set_status(0,0)
+        air_set_status(1,0)
+    if(level == 1):
+        air_set_status(0,1)
+        air_set_status(1,0)
+    if(level == 2):
+        air_set_status(0,1)
+        air_set_status(1,1)
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
+
+
+def air_set_timer(time):
+    """"""
+    print time
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
+
+
+def air_set_temp(temp):
+    """"""
+    print temp
+    status = sys_status_betrieb()
+    r =api_response(status,304)
+    r.headers["Location"] = "/"
+    return r
+
+
+def air_set_raucherraum_on():
+    """"""
+    return air_set_status(2,1)
+
+
+def air_set_raucherraum_off():
+    """"""
+    return air_set_status(2,0)
