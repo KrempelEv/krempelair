@@ -17,61 +17,61 @@ from lib.bus.digitalInOut import digiInOut
 def sys_status_betrieb():
     """"""
     pins = digiInOut()
-    stateMsg = {"ZUL St1": "0",
-                "ZUL St2": "0",
-                "FOL St1": "0",
-                "FOL St2": "0",
-                "LE PU": "0",
-                "5": "0",
-                "6": "0",
-                "7": "0"}
+    stateMsg = {"ZUL_St1": false,
+                "ZUL_St2": false,
+                "FOL_St1": false,
+                "FOL_St2": false,
+                "LE_PU": false,
+                "5": false,
+                "6": false,
+                "7": false}
     status = pins.getValue(0x21)
     if status&1 != 0:
-        stateMsg["ZUL St1"] = "1"
+        stateMsg["ZUL_St1"] = true
     if status&2 != 0:
-        stateMsg["ZUL St2"] = "1"
+        stateMsg["ZUL_St2"] = true
     if status&4 != 0:
-        stateMsg["FOL St1"] = "1"
+        stateMsg["FOL_St1"] = true
     if status&8 != 0:
-        stateMsg["FOL St2"] = "1"
+        stateMsg["FOL_St2"] = true
     if status&16 != 0:
-        stateMsg["LE PU"] = "1"
+        stateMsg["LE_PU"] = true
     if status&32 != 0:
-        stateMsg["5"] = "1"
+        stateMsg["5"] = true
     if status&64 != 0:
-        stateMsg["6"] = "1"
+        stateMsg["6"] = true
     if status&128 != 0:
-        stateMsg["7"] = "1"
+        stateMsg["7"] = true
     return stateMsg
 
 def sys_status_stoerung():
     """"""
     pins = digiInOut()
-    stateMsg = {"Quit": "0",
-                "Sammelalarm": "0",
-                "Frost": "0",
-                "StroemZul": "0",
-                "StroemFol": "0",
-                "AL5": "0",
-                "AL6": "0",
-                "AL7": "0"}
+    stateMsg = {"Quit": false,
+                "Sammelalarm": false,
+                "Frost": false,
+                "Stroem_ZUL": false,
+                "Stroem_FOL": false,
+                "AL5": false,
+                "AL6": false,
+                "AL7": false}
     status = pins.getValue(0x22)
     if status&1 != 0:
-        stateMsg["Quit"] = "1"
+        stateMsg["Quit"] = true
     if status&2 != 0:
-        stateMsg["Sammelalarm"] = "1"
+        stateMsg["Sammelalarm"] = true
     if status&4 != 0:
-        stateMsg["Frost"] = "1"
+        stateMsg["Frost"] = true
     if status&8 != 0:
-        stateMsg["StroemZul"] = "1"
+        stateMsg["Stroem_ZUL"] = true
     if status&16 != 0:
-        stateMsg["StroemFol"] = "1"
+        stateMsg["Stroem_FOL"] = true
     if status&32 != 0:
-        stateMsg["AL5"] = "1"
+        stateMsg["AL5"] = true
     if status&64 != 0:
-        stateMsg["AL6"] = "1"
+        stateMsg["AL6"] = true
     if status&128 != 0:
-        stateMsg["AL7"] = "1"
+        stateMsg["AL7"] = true
     return stateMsg
 
 def air_get_status_stoerung():
