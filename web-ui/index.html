@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="KrempelAirApp" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta tags below: //-->
+
+	<!-- Page Title //-->
+    <title>KrempelAir | Fresh Sound, Light and Air</title>
+
+
+    <link href="css/main.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries //-->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-controller="AirFlowController">
+    <h1>Krempel Air</h1>
+    <a href="#Stufe1" ng-click="Klick(1)" onclick="return false;" class="btn"><span class="statusBullet {{status['ZUL_St1'] ? 'on' : 'off'}}"></span> Stufe 1</a>
+    <a href="#Stufe2" ng-click="Klick(2)" onclick="return false;" class="btn">Stufe 2</a>
+    <a href="#onoff" ng-click="Klick(0)" onclick="return false;" class="btn">Abstellen</a>
+    <table id="statusTab">
+        <tr>
+            <td class="label">Zuluft Stufe 1:</td>
+            <td class="{{status['ZUL_St1'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Zuluft Stufe 2:</td>
+            <td class="{{status['ZUL_St2'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Fortluft Stufe 1:</td>
+            <td class="{{status['FOL_St1'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Fortluft Stufe 2:</td>
+            <td class="{{status['FOL_St2'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Lufterhitzer Pumpe:</td>
+            <td class="{{status['LE_PU'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+    </table>
+    <!-- jQuery  //-->
+    <script src="js/angular.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
