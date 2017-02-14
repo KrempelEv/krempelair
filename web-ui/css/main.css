@@ -1,0 +1,35 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: monospace;
+}
+
+.off {
+    background-color: #ff0000;
+}
+.on {
+    background-color: #00f000;
+}
+
+.btn {
+    display: block;
+    min-width: 99.9%;
+    font-size: 16pt;
+    text-align: center;
+    border: 1px solid #ffffff;
+    padding: 5px;
+    color: #ffffff;
+    background-color: black;
+    text-decoration: none;
+}
+
+#statusTab {
+    margin-top: 30px;
+    min-width: 95%;
+
+}
+#statusTab .label{
+    text-align: right;
+    min-width: 95%;
+
+}
