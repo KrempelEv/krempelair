@@ -23,7 +23,7 @@ hr {
 
 .btn {
     display: block;
-    min-width: 99.9%;
+    min-width: 99.5%;
     font-size: 16pt;
     text-align: center;
     border: 1px solid #ffffff;
@@ -67,6 +67,6 @@ hr {
 }
 #tempTab .temp{
     text-align: right;
-    min-width: 95%;
+    min-width: 100px;
 
 }
