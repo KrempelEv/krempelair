@@ -66,6 +66,26 @@
             <td class="{{stoerung['Stroem_FOL'] ? 'off' : 'on'}}">&nbsp;</td>
         </tr>
     </table>
+    <hr>
+    <h2> Temperaturen </h2>
+    <table id="tempTab">
+        <tr>
+            <td class="label">Temperatur Zuluft:</td>
+            <td class="temp">{{temperatur['ZUL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Abluft:</td>
+            <td class="temp">{{temperatur['ABL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Fortluft:</td>
+            <td class="temp">{{temperatur['FOL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Aussenluft:</td>
+            <td class="temp">{{temperatur['AUL']}}</td>
+        </tr>
+    </table>
     <!-- jQuery  //-->
     <script src="js/angular.min.js"></script>
     <script src="js/main.js"></script>
