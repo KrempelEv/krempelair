@@ -20,9 +20,10 @@
   </head>
   <body ng-controller="AirFlowController">
     <h1>Krempel Air</h1>
-    <a href="#Stufe1" ng-click="Klick(1)" onclick="return false;" class="btn"><span class="statusBullet {{status['ZUL_St1'] ? 'on' : 'off'}}"></span> Stufe 1</a>
+    <a href="#Stufe1" ng-click="Klick(1)" onclick="return false;" class="btn">Stufe 1</a>
     <a href="#Stufe2" ng-click="Klick(2)" onclick="return false;" class="btn">Stufe 2</a>
     <a href="#onoff" ng-click="Klick(0)" onclick="return false;" class="btn">Abstellen</a>
+    <h2> Betriebsstatus </h2>
     <table id="statusTab">
         <tr>
             <td class="label">Zuluft Stufe 1:</td>
@@ -43,6 +44,26 @@
         <tr>
             <td class="label">Lufterhitzer Pumpe:</td>
             <td class="{{status['LE_PU'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+    </table>
+    <hr>
+    <h2> Störungen </h2>
+    <table id="errorTab">
+        <tr>
+            <td class="label">Sammelalarm:</td>
+            <td class="{{stoerung['Sammelalarm'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Frost:</td>
+            <td class="{{stoerung['Frost'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Keine Strömung ZUL:</td>
+            <td class="{{stoerung['Stoem_ZUL'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Keine Strömung FOL:</td>
+            <td class="{{stoerung['Stoem_FOL'] ? 'on' : 'off'}}">&nbsp;</td>
         </tr>
     </table>
     <!-- jQuery  //-->
