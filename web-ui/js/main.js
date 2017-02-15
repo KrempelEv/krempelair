@@ -8,6 +8,9 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         $http.get(uri+"/").then(function (response) {
             $scope.status = response.data;
         });
+        $http.get(uri+"/stoerung").then(function (response) {
+            $scope.stoerung = response.data;
+        });
         $timeout(function(){
          $scope.Refresh();
         },800);
