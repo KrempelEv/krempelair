@@ -88,9 +88,9 @@ def air_get_status_betrieb():
 
 def air_get_temperaturen():
     """"""
-    temperaturen = {"ZUL" : 0
-                    "ABL" : 0
-                    "FOL" : 0
+    temperaturen = {"ZUL" : 0,
+                    "ABL" : 0,
+                    "FOL" : 0,
                     "AUL" : 0}
     analogIn = analogInOut()
     wertZUL = analogIn.getValue(0x08,0x00)
