@@ -94,13 +94,13 @@ def air_get_temperaturen():
                     "AUL" : 0}
     analogIn = analogInOut()
     wertZUL = analogIn.getValue(0x08,0x00)
-    tempZUL = wertZUL / 1024 * 50
+    tempZUL = (float(wertZUL)/1024)*50
     wertABL = analogIn.getValue(0x08,0x01)
-    tempABL = wertZUL / 1024 * 50
+    tempABL = (float(tempABL)/1024)*50
     wertFOL = analogIn.getValue(0x08,0x02)
-    tempFOL = wertZUL / 1024 * 50
+    tempFOL = (float(tempFOL)/1024)*50
     wertAUL = analogIn.getValue(0x08,0x03)
-    tempAUL = wertZUL / 1024 * 50
+    tempAUL = (float(tempAUL)/1024)*50
     temperaturen["ZUL"] = tempZUL
     temperaturen["ABL"] = tempABL
     temperaturen["FOL"] = tempFOL
