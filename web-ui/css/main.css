@@ -54,3 +54,19 @@ hr {
     min-width: 95%;
 
 }
+
+#tempTab {
+    margin-top: 30px;
+    min-width: 95%;
+
+}
+#tempTab .label{
+    text-align: right;
+    min-width: 95%;
+
+}
+#tempTab .temp{
+    text-align: right;
+    min-width: 95%;
+
+}
