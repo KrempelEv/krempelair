@@ -73,8 +73,8 @@ mount = /api=uwsgi.py
 manage-script-name=true
 ```
 
-## This is the and my Friend
-restarting all affectet services and try if you cann access the web-ui
+## This is the end my Friend
+restarting all affectet services and try if you can access the web-ui
 
 ```
 # systemctrl restart {nginx,uwsgi}
