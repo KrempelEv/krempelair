@@ -43,3 +43,14 @@ hr {
     min-width: 95%;
 
 }
+
+#errorTab {
+    margin-top: 30px;
+    min-width: 95%;
+
+}
+#errorTab .label{
+    text-align: right;
+    min-width: 95%;
+
+}
