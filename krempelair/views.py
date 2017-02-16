@@ -12,6 +12,7 @@ from flask.views import View
 
 from lib.jsonApi import api_response
 from lib.bus.digitalInOut import digiInOut
+from lib.bus.analogInOut import analogInOut
 
 
 def sys_status_betrieb():
@@ -85,6 +86,26 @@ def air_get_status_betrieb():
     status = sys_status_betrieb()
     return api_response(status)
 
+def air_get_temperaturen():
+    """"""
+    temperaturen = {"ZUL" : 0,
+                    "ABL" : 0,
+                    "FOL" : 0,
+                    "AUL" : 0}
+    analogIn = analogInOut()
+    wertZUL = analogIn.getValue(0x08,0x00)
+    tempZUL = (float(wertZUL)/1024)*50
+    wertABL = analogIn.getValue(0x08,0x01)
+    tempABL = (float(wertABL)/1024)*50
+    wertFOL = analogIn.getValue(0x08,0x02)
+    tempFOL = (float(wertFOL)/1024)*50
+    wertAUL = analogIn.getValue(0x08,0x03)
+    tempAUL = (float(wertAUL)/1024)*50
+    temperaturen["ZUL"] = tempZUL
+    temperaturen["ABL"] = tempABL
+    temperaturen["FOL"] = tempFOL
+    temperaturen["AUL"] = tempAUL
+    return api_response(temperaturen)
 
 def air_set_status(pin,state):
     """"""

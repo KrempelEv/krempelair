@@ -47,7 +47,7 @@ class Krempelair(flask.Flask):
             ('air_set_temp', '/lueftung/temperatur/<int:temp>'),
             ('air_set_raucherraum_on', '/raucherraum/on'),
             ('air_set_raucherraum_off', '/raucherraum/off'),
-
+            ('air_get_temperaturen', '/lueftung/temperatur'),
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
 

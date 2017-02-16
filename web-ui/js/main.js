@@ -11,6 +11,9 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         $http.get(uri+"/stoerung").then(function (response) {
             $scope.stoerung = response.data;
         });
+        $http.get(uri+"/lueftung/temperatur").then(function (response) {
+            $scope.temperatur = response.data;
+        });
         $timeout(function(){
          $scope.Refresh();
         },800);
