@@ -22,7 +22,7 @@
     <h1>Krempel Air</h1>
     <a href="#Stufe1" ng-click="Klick(1)" onclick="return false;" class="btn">Stufe 1</a>
     <a href="#Stufe2" ng-click="Klick(2)" onclick="return false;" class="btn">Stufe 2</a>
-    <a href="#onoff" ng-click="Klick(0)" onclick="return false;" class="btn">Abstellen</a>
+    <a href="#onoff" ng-click="Klick(0)" onclick="return false;" class="btn">Ausschalten</a>
     <h2> Betriebsstatus </h2>
     <table id="statusTab">
         <tr>
@@ -68,6 +68,9 @@
     </table>
     <hr>
     <h2> Temperaturen </h2>
+    <form name="sollTempForm">
+         Solltemperatur: <input name="sollTemp" ng-model="sollTemp" required>
+    </form>
     <table id="tempTab">
         <tr>
             <td class="label">Temperatur Zuluft:</td>
