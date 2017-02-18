@@ -5,6 +5,7 @@ import os
 import sys
 import json
 import smbus
+import pickle
 
 
 from flask import request, render_template, current_app, url_for, make_response
@@ -151,9 +152,11 @@ def air_set_timer(time):
 
 def air_set_temp(temp):
     """"""
-    print temp
-    status = sys_status_betrieb()
-    r =api_response(status,200)
+    
+    shared = {"Temp":temp}
+    fp = open("/opt/krempel/share/temp.pkl","w")
+    pickle.dump(shared, fp)
+    r =api_response(temp,200)
     return r
 
 
