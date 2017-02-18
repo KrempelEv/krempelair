@@ -33,6 +33,12 @@ hr {
     text-decoration: none;
 }
 
+#inputForm{
+    min-width: 95%;
+    margin-top: 30px;
+    text-align: right;
+}
+
 #statusTab {
     margin-top: 30px;
     min-width: 95%;
