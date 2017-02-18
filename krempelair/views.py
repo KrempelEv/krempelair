@@ -153,7 +153,7 @@ def air_set_timer(time):
 def air_set_temp(temp):
     """"""
     
-    shared = {"Temp":temp}
+    shared = {"Temp":str(temp)}
     fp = open("/opt/krempel/share/temp.pkl","wb")
     pickle.dump(shared, fp)
     r =api_response(temp,200)
