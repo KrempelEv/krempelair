@@ -154,7 +154,7 @@ def air_set_temp(temp):
     """"""
     
     shared = {"Temp":temp}
-    fp = open("/opt/krempel/share/temp.pkl","w")
+    fp = open("/opt/krempel/share/temp.pkl","wb")
     pickle.dump(shared, fp)
     r =api_response(temp,200)
     return r
