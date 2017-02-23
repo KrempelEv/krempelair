@@ -22,6 +22,10 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         $http.get(uri+"/lueftung/stufe/"+Klick);
         $scope.Refresh();
     }
+    
+    if ($scope.sollTemp) {
+        $http.get(uri+"/lueftung/temperatur/"+$scope.sollTemp);
+    }
 
     $scope.Refresh();
 
