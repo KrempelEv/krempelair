@@ -198,7 +198,7 @@ def air_get_NAK():
     """"""
     fp = open("/opt/krempel/share/NAK.pkl", "rb")
     sh = pickle.load(fp)
-    NAK = bool(sh["NAK"])
+    NAK = int(sh["NAK"])
     return NAK
 
 def air_set_raucherraum_on():
