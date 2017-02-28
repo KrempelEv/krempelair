@@ -14,9 +14,14 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         $http.get(uri+"/lueftung/temperatur").then(function (response) {
             $scope.temperatur = response.data;
             if($scope.sollTemp && (parseFloat(parseFloat($scope.sollTemp).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSoll"]).toFixed(2)))){
-                $http.get(uri+"/lueftung/temperatur/"+parseFloat($scope.sollTemp));
+                $http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
             }else{
                 $scope.sollTemp = response.data["TempSoll"];
+            }
+            if($scope.sollTempNAK && (parseFloat(parseFloat($scope.sollTempNAK).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSollNAK"]).toFixed(2)))){
+                $http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTemp));
+            }else{
+                $scope.sollTempNAK = response.data["TempSollNAK"];
             }
         });
        
