@@ -76,6 +76,10 @@
          Solltemperatur: <input name="sollTemp" ng-model="sollTemp" required>
     </form>
     <table id="tempTab">
+	<tr>
+            <td class="label">Solltemperatur:</td>
+            <td class="temp">{{temperatur['TempSoll']}}</td>
+        </tr>
         <tr>
             <td class="label">Temperatur Zuluft:</td>
             <td class="temp">{{temperatur['ZUL']}}</td>
