@@ -20,10 +20,13 @@
   </head>
   <body ng-controller="AirFlowController">
     <h1>Krempel Air</h1>
+    <h2>Hauptlüftung</h2>
     <a href="#Stufe1" ng-click="Klick(1)" onclick="return false;" class="btn">Stufe 1</a>
     <a href="#Stufe2" ng-click="Klick(2)" onclick="return false;" class="btn">Stufe 2</a>
     <a href="#onoff" ng-click="Klick(0)" onclick="return false;" class="btn">Ausschalten</a>
-    <h2> Betriebsstatus </h2>
+    <h2>Abluft Raucherraum</h2>
+    <a href="#RaucherEin" ng-click="Raucher(1)" onclick="return false;" class="btn">Einschalten</a>
+    <a href="#RaucherAus" ng-click="Raucher(0)" onclick="return false;" class="btn">Auschalten</a>
     <table id="statusTab">
         <tr>
             <td class="label">Zuluft Stufe 1:</td>
