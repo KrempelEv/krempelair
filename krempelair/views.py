@@ -94,7 +94,8 @@ def air_get_temperaturen():
                     "FOL" : 0,
                     "AUL" : 0,
                     "RaumVorne" : 0,
-                    "RaumHinten" : 0}
+                    "RaumHinten" : 0,
+                    "TempSoll" : 0}
     analogIn = analogInOut()
     wertZUL = analogIn.getValue(0x08,0x00)
     tempZUL = round((float(wertZUL)/1024)*50,1)
@@ -108,12 +109,14 @@ def air_get_temperaturen():
     tempRaumVorne = round((float(wertRaumVorne)/1024)*50.0,1)
     wertRaumHinten = analogIn.getValue(0x08,0x01)
     tempRaumHinten = round((float(wertRaumHinten)/1024)*50.0,1)
+    tempSoll = air_get_temp()
     temperaturen["ZUL"] = tempZUL
     temperaturen["ABL"] = tempABL
     temperaturen["FOL"] = tempFOL
     temperaturen["AUL"] = tempAUL
     temperaturen["RaumVorne"] = tempRaumVorne
     temperaturen["RaumHinten"] = tempRaumHinten
+    temperaturen["TempSoll"] = tempSoll
     return api_response(temperaturen)
 
 def air_set_status(pin,state):
@@ -152,13 +155,18 @@ def air_set_timer(time):
 
 def air_set_temp(temp):
     """"""
-    
     shared = {"Temp":str(temp)}
     fp = open("/opt/krempel/share/temp.pkl","wb")
     pickle.dump(shared, fp)
     r =api_response(temp,200)
     return r
 
+def air_get_temp():
+    """"""
+    fp = open("/opt/krempel/share/temp.pkl", "rb")
+    sh = pickle.load(fp)
+    tempSoll = float(sh["Temp"])
+    return tempSoll
 
 def air_set_raucherraum_on():
     """"""
