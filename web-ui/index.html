@@ -105,7 +105,15 @@
     <hr> 
     <h2> Einstellungen </h2>
     <form name="sollTempForm" class="inputForm">
-	    <label>Solltemperatur: </label><input name="sollTemp" ng-model="sollTemp">
+	<label>Solltemperatur: 
+        <input name="sollTemp" ng-model="sollTemp">
+    </label>
+    <label>Nachtabkühlung aktiv:
+        <input type="checkbox" ng-model="NAK">
+    </label>
+    <label>Solltemperatur Nachtabkühlung: 
+        <input name="sollTemp" ng-model="sollTempNAK">
+    </label>
     </form>	  
     <!-- jQuery  //-->
     <script src="js/angular.min.js"></script>
