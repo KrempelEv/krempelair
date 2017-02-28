@@ -70,15 +70,16 @@ hr {
     min-width: 20px;
 }
 
-#inputForm .label{
+label{
     display: inline-block;
     float: left;
-    clear: left;
-    width: 250px;
+    clear: right;
+    width: 84%;
     text-align: right;
 }
 
-#inputForm {
+input {
   display: inline-block;
-  float: left;
+  float: right;
+  width: 15%;
 }
