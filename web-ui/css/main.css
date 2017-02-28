@@ -70,7 +70,7 @@ hr {
     min-width: 20px;
 }
 
-label{
+#inputForm .label{
     display: inline-block;
     float: left;
     clear: right;
@@ -78,7 +78,7 @@ label{
     text-align: right;
 }
 
-input {
+#inputForm .input {
   display: inline-block;
   float: right;
   width: 15%;
