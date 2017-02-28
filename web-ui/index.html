@@ -72,9 +72,6 @@
     </table>
     <hr>
     <h2> Temperaturen </h2>
-    <form name="sollTempForm" class="inputForm">
-         Solltemperatur: <input name="sollTemp" ng-model="sollTemp" required>
-    </form>
     <table id="tempTab">
 	<tr>
             <td class="label">Solltemperatur:</td>
@@ -105,6 +102,11 @@
             <td class="temp">{{temperatur['RaumHinten']}}</td>
         </tr>
     </table>
+    <hr> 
+    <h2> Einstellungen </h2>
+    <form name="sollTempForm" class="inputForm">
+         Solltemperatur: <input name="sollTemp" ng-model="sollTemp">
+    </form>	  
     <!-- jQuery  //-->
     <script src="js/angular.min.js"></script>
     <script src="js/main.js"></script>
