@@ -29,7 +29,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
     
     $scope.Raucher = function(value){
         if(value == 0){
-            $http.get(uri+"/raucherraum/off";
+            $http.get(uri+"/raucherraum/off");
         }else{
             $http.get(uri+"/raucherraum/on");
         }    
