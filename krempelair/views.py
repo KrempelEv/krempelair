@@ -186,6 +186,21 @@ def air_get_tempNAK():
     tempSollNAK = float(sh["TempNAK"])
     return tempSollNAK
 
+def air_set_NAK(NAK):
+    """"""
+    shared = {"NAK":str(NAK)}
+    fp = open("/opt/krempel/share/NAK.pkl","wb")
+    pickle.dump(shared, fp)
+    r =api_response(NAK,200)
+    return r
+
+def air_get_NAK():
+    """"""
+    fp = open("/opt/krempel/share/NAK.pkl", "rb")
+    sh = pickle.load(fp)
+    NAK = bool(sh["NAK"])
+    return NAK
+
 def air_set_raucherraum_on():
     """"""
     return air_set_status(2,1)
