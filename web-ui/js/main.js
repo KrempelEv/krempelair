@@ -13,6 +13,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         });
         $http.get(uri+"/lueftung/temperatur").then(function (response) {
             $scope.temperatur = response.data;
+            $scope.sollTemp = response.data["TempSoll"];
         });
         if ($scope.sollTemp) {
             $http.get(uri+"/lueftung/temperatur/"+parseFloat($scope.sollTemp));
