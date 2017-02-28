@@ -70,18 +70,10 @@ hr {
     min-width: 20px;
 }
 
-#inputForm .label{
+inputForm{
     display: inline-block;
     float: left;
     clear: right;
     width: 84%;
     text-align: right;
-    background-color: #ff0000;
-}
-
-#inputForm .input {
-  display: inline-block;
-  float: right;
-  width: 15%;
-  background-color: #ff0000;
 }
