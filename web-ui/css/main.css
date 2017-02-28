@@ -23,7 +23,7 @@ hr {
 
 .btn {
     display: block;
-    min-width: 99.5%;
+    min-width: 96%;
     font-size: 16pt;
     text-align: center;
     border: 1px solid #ffffff;
@@ -33,17 +33,11 @@ hr {
     text-decoration: none;
 }
 
-#inputForm{
-    min-width: 95%;
-    margin-top: 30px;
-    text-align: right;
-}
-
 #statusTab {
     margin-top: 30px;
     min-width: 95%;
-
 }
+
 #statusTab .label{
     text-align: right;
     min-width: 95%;
@@ -53,12 +47,11 @@ hr {
 #errorTab {
     margin-top: 30px;
     min-width: 95%;
-
 }
+
 #errorTab .label{
     text-align: right;
     min-width: 95%;
-
 }
 
 #tempTab {
@@ -66,13 +59,26 @@ hr {
     min-width: 95%;
 
 }
+
 #tempTab .label{
     text-align: right;
     min-width: 95%;
-
 }
+
 #tempTab .temp{
     text-align: right;
-    min-width: 100px;
+    min-width: 20px;
+}
 
+#inputForm .label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+
+#inputForm {
+  display: inline-block;
+  float: left;
 }
