@@ -69,11 +69,3 @@ hr {
     text-align: right;
     min-width: 20px;
 }
-
-inputForm{
-    display: inline-block;
-    float: left;
-    clear: right;
-    width: 84%;
-    text-align: right;
-}
