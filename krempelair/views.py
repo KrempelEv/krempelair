@@ -95,7 +95,8 @@ def air_get_temperaturen():
                     "AUL" : 0,
                     "RaumVorne" : 0,
                     "RaumHinten" : 0,
-                    "TempSoll" : 0}
+                    "TempSoll" : 0,
+                    "TempSollNAK": 0}
     analogIn = analogInOut()
     wertZUL = analogIn.getValue(0x08,0x00)
     tempZUL = round((float(wertZUL)/1024)*50,1)
@@ -110,6 +111,7 @@ def air_get_temperaturen():
     wertRaumHinten = analogIn.getValue(0x08,0x01)
     tempRaumHinten = round((float(wertRaumHinten)/1024)*50.0,1)
     tempSoll = air_get_temp()
+    tempSollNAK = air_get_tempNAK()
     temperaturen["ZUL"] = tempZUL
     temperaturen["ABL"] = tempABL
     temperaturen["FOL"] = tempFOL
@@ -117,6 +119,7 @@ def air_get_temperaturen():
     temperaturen["RaumVorne"] = tempRaumVorne
     temperaturen["RaumHinten"] = tempRaumHinten
     temperaturen["TempSoll"] = tempSoll
+    temperaturen["TempSollNAK"] = tempSollNAK
     return api_response(temperaturen)
 
 def air_set_status(pin,state):
