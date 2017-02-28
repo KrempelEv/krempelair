@@ -47,6 +47,7 @@ class Krempelair(flask.Flask):
             ('air_set_temp', '/lueftung/temperatur/sollTemp/<int:temp>'),
             ('air_set_tempNAK', '/lueftung/temperatur/sollTempNAK/<int:temp>'),
             ('air_set_NAK', '/lueftung/NAK/<int:NAK>'),
+            ('air_get_NAK', '/lueftung/NAK'),
             ('air_set_raucherraum_on', '/raucherraum/on'),
             ('air_set_raucherraum_off', '/raucherraum/off'),
             ('air_get_temperaturen', '/lueftung/temperatur'),
