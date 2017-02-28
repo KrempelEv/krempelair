@@ -76,10 +76,12 @@ hr {
     clear: right;
     width: 84%;
     text-align: right;
+    background-color: #ff0000;
 }
 
 #inputForm .input {
   display: inline-block;
   float: right;
   width: 15%;
+  background-color: #ff0000;
 }
