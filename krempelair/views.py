@@ -171,10 +171,10 @@ def air_set_level(level):
         _air_set_status(1,1)
     # Raucher Ein
     if(level == 10):
-        _air_set_status(2,1)
+        _air_set_status(2,0)
     # Raucher Aus
     if(level == 11):
-        _air_set_status(2,0)
+        _air_set_status(2,1)
     
     status = _sys_status_betrieb()
     return api_response(status,200)
