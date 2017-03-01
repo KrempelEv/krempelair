@@ -39,18 +39,20 @@ class Krempelair(flask.Flask):
 
     def setup_routes(self):
         for endpoint, rule in [
+            # Getter der Temperaturen und des Betriebsstatus
             ('air_get_status_betrieb',   '/'),
             ('air_get_status_stoerung',   '/stoerung'),
-            ('air_set_status',   '/<int:pin>/<int:state>'),
+            ('air_get_temperaturen', '/lueftung/temperatur'),
+            
+            # Setters für Funktionen
             ('air_set_level', '/lueftung/stufe/<int:level>'),
             ('air_set_timer', '/lueftung/timer/<int:time>'),
             ('air_set_temp', '/lueftung/temperatur/sollTemp/<int:temp>'),
             ('air_set_tempNAK', '/lueftung/temperatur/sollTempNAK/<int:temp>'),
             ('air_set_NAK', '/lueftung/NAK/<int:NAK>'),
-            ('air_get_NAK', '/lueftung/NAK'),
             ('air_set_raucherraum_on', '/raucherraum/on'),
             ('air_set_raucherraum_off', '/raucherraum/off'),
-            ('air_get_temperaturen', '/lueftung/temperatur'),
+
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
 
