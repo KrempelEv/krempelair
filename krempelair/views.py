@@ -76,48 +76,7 @@ def _sys_status_stoerung():
         stateMsg["AL7"] = True
     return stateMsg
 
-def _air_set_status(pin,state):
-    """"""
-    pins = digiInOut()
-    pins.setValue(0x20, pin, state)
-    status = _sys_status_betrieb()
-    r =api_response(status,304)
-    r.headers["Location"] = "/"
-    return r
-
-def _sys_get_tempSoll():
-    """"""
-    fp = open("/opt/krempel/share/temp.pkl", "rb")
-    sh = pickle.load(fp)
-    tempSoll = float(sh["Temp"])
-    return tempSoll
-
-def _sys_get_NAK():
-    """"""
-    fp = open("/opt/krempel/share/NAK.pkl", "rb")
-    sh = pickle.load(fp)
-    NAK = int(sh["NAK"])
-    return api_response(sh,200)
-
-def _sys_get_tempNAK():
-    """"""
-    fp = open("/opt/krempel/share/tempNAK.pkl", "rb")
-    sh = pickle.load(fp)
-    tempSollNAK = float(sh["TempNAK"])
-    return tempSollNAK
-
-# API Functions
-def air_get_status_stoerung():
-    """"""
-    status = _sys_status_stoerung()
-    return api_response(status)
-
-def air_get_status_betrieb():
-    """"""
-    status = _sys_status_betrieb()
-    return api_response(status)
-
-def air_get_temperaturen():
+def _sys_get_temperaturen():
     """"""
     temperaturen = {"ZUL" : 0,
                     "ABL" : 0,
@@ -152,6 +111,49 @@ def air_get_temperaturen():
     temperaturen["RaumHinten"] = tempRaumHinten
     temperaturen["TempSoll"] = tempSoll
     temperaturen["TempSollNAK"] = tempSollNAK
+    return temperaturen
+
+def _sys_set_status(pin,state):
+    """"""
+    pins = digiInOut()
+    pins.setValue(0x20, pin, state)
+    return {"pin":pin,"state":state}
+
+def _sys_get_tempSoll():
+    """"""
+    fp = open("/opt/krempel/share/temp.pkl", "rb")
+    sh = pickle.load(fp)
+    tempSoll = float(sh["Temp"])
+    return tempSoll
+
+def _sys_get_NAK():
+    """"""
+    fp = open("/opt/krempel/share/NAK.pkl", "rb")
+    sh = pickle.load(fp)
+    NAK = int(sh["NAK"])
+    return NAK
+
+def _sys_get_tempNAK():
+    """"""
+    fp = open("/opt/krempel/share/tempNAK.pkl", "rb")
+    sh = pickle.load(fp)
+    tempSollNAK = float(sh["TempNAK"])
+    return tempSollNAK
+
+# API Functions
+def air_get_status_stoerung():
+    """"""
+    status = _sys_status_stoerung()
+    return api_response(status)
+
+def air_get_status_betrieb():
+    """"""
+    status = _sys_status_betrieb()
+    return api_response(status)
+
+def air_get_temperaturen():
+    """"""
+    temperaturen = _sys_get_temperaturen()
     return api_response(temperaturen)
 
 
@@ -159,22 +161,22 @@ def air_set_level(level):
     """"""
     # Lueftung Aus
     if(level == 0):
-        _air_set_status(0,0)
-        _air_set_status(1,0)
+        _sys_set_status(0,0)
+        _sys_set_status(1,0)
     # Lueftung Stufe 1
     if(level == 1):
-        _air_set_status(0,1)
-        _air_set_status(1,0)
+        _sys_set_status(0,1)
+        _sys_set_status(1,0)
     # Lueftung Stufe 2
     if(level == 2):
-        _air_set_status(0,1)
-        _air_set_status(1,1)
+        _sys_set_status(0,1)
+        _sys_set_status(1,1)
     # Raucher Ein
     if(level == 10):
-        _air_set_status(2,0)
+        _sys_set_status(2,0)
     # Raucher Aus
     if(level == 11):
-        _air_set_status(2,1)
+        _sys_set_status(2,1)
     
     status = _sys_status_betrieb()
     return api_response(status,200)
