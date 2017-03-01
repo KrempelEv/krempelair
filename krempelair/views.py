@@ -205,12 +205,3 @@ def air_set_NAK(NAK):
     fp = open("/opt/krempel/share/NAK.pkl","wb")
     pickle.dump(shared, fp)
     return api_response(NAK,200)
-
-def air_set_raucherraum_on():
-    """"""
-    return _air_set_status(2,1)
-
-
-def air_set_raucherraum_off():
-    """"""
-    return _air_set_status(2,0)
