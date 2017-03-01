@@ -47,7 +47,7 @@ class Krempelair(flask.Flask):
             # Setters für Funktionen
             ('air_set_level', '/lueftung/stufe/<int:level>'),
             ('air_set_timer', '/lueftung/timer/<int:time>'),
-            ('air_set_temp', '/lueftung/temperatur/sollTemp/<int:temp>'),
+            ('air_set_tempSoll', '/lueftung/temperatur/sollTemp/<int:temp>'),
             ('air_set_tempNAK', '/lueftung/temperatur/sollTempNAK/<int:temp>'),
             ('air_set_NAK', '/lueftung/NAK/<int:NAK>'),
             ('air_set_raucherraum_on', '/raucherraum/on'),
