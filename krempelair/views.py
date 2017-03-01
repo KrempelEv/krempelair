@@ -26,7 +26,8 @@ def _sys_status_betrieb():
                 "LE_PU": False,
                 "Raucherraum": False,
                 "6": False,
-                "7": False}
+                "7": False,
+                "NAK" : False}
     status = pins.getValue(0x21)
     if status&1 != 0:
         stateMsg["ZUL_St1"] = True
@@ -44,6 +45,8 @@ def _sys_status_betrieb():
         stateMsg["6"] = True
     if status&128 != 0:
         stateMsg["7"] = True
+    NAK = _sys_get_NAK()
+    stateMsg["NAK"] = NAK
     return stateMsg
 
 def _sys_status_stoerung():
