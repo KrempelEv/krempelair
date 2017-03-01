@@ -24,7 +24,7 @@ def _sys_status_betrieb():
                 "FOL_St1": False,
                 "FOL_St2": False,
                 "LE_PU": False,
-                "5": False,
+                "Raucherraum": False,
                 "6": False,
                 "7": False}
     status = pins.getValue(0x21)
@@ -39,7 +39,7 @@ def _sys_status_betrieb():
     if status&16 != 0:
         stateMsg["LE_PU"] = True
     if status&32 != 0:
-        stateMsg["5"] = True
+        stateMsg["Raucherraum"] = True
     if status&64 != 0:
         stateMsg["6"] = True
     if status&128 != 0:
