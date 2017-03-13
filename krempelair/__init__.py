@@ -40,7 +40,7 @@ class Krempelair(flask.Flask):
     def setup_routes(self):
         for endpoint, rule in [
             #Allgemeine Funktionen
-            ('air_login',   '/login/<user>/<key>'),
+            #('air_login',   '/login/<user>/<key>'),
             
             # Getter der Temperaturen und des Betriebsstatus
             ('air_get_status_betrieb',   '/'),
