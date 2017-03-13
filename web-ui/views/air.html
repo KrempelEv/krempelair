@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="KrempelAirApp" lang="en">
+  <body ng-controller="AirFlowController">
+    <h2>Hauptlüftung</h2>
+    <a href="#Stufe1" ng-click="Klick(1)" onclick="return false;" class="btn">Stufe 1</a>
+    <a href="#Stufe2" ng-click="Klick(2)" onclick="return false;" class="btn">Stufe 2</a>
+    <a href="#onoff" ng-click="Klick(0)" onclick="return false;" class="btn">Ausschalten</a>
+    <h2>Abluft Raucherraum</h2>
+    <a href="#RaucherEin" ng-click="Klick(11)" onclick="return false;" class="btn">Einschalten</a>
+    <a href="#RaucherAus" ng-click="Klick(10)" onclick="return false;" class="btn">Auschalten</a>
+    <table id="statusTab">
+        <tr>
+            <td class="label">Zuluft Stufe 1:</td>
+            <td class="{{status['ZUL_St1'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Zuluft Stufe 2:</td>
+            <td class="{{status['ZUL_St2'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Fortluft Stufe 1:</td>
+            <td class="{{status['FOL_St1'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Fortluft Stufe 2:</td>
+            <td class="{{status['FOL_St2'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Lufterhitzer Pumpe:</td>
+            <td class="{{status['LE_PU'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Abluft Raucherraum:</td>
+            <td class="{{status['Raucherraum'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">NAK Aktiv:</td>
+            <td class="{{status['NAK'] ? 'on' : 'off'}}">&nbsp;</td>
+        </tr>
+    </table>
+    <hr>
+    <h2> Störungen </h2>
+    <table id="errorTab">
+        <tr>
+            <td class="label">Sammelalarm:</td>
+            <td class="{{stoerung['Sammelalarm'] ? 'off' : 'on'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Frost:</td>
+            <td class="{{stoerung['Frost'] ? 'off' : 'on'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Keine Strömung ZUL:</td>
+            <td class="{{stoerung['Stroem_ZUL'] ? 'off' : 'on'}}">&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="label">Keine Strömung FOL:</td>
+            <td class="{{stoerung['Stroem_FOL'] ? 'off' : 'on'}}">&nbsp;</td>
+        </tr>
+    </table>
+    <hr>
+    <h2> Temperaturen </h2>
+    <table id="tempTab">
+        <tr>
+            <td class="label">Temperatur Zuluft:</td>
+            <td class="temp">{{temperatur['ZUL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Abluft:</td>
+            <td class="temp">{{temperatur['ABL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Fortluft:</td>
+            <td class="temp">{{temperatur['FOL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Aussenluft:</td>
+            <td class="temp">{{temperatur['AUL']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Raum vorne:</td>
+            <td class="temp">{{temperatur['RaumVorne']}}</td>
+        </tr>
+        <tr>
+            <td class="label">Temperatur Raum hinten:</td>
+            <td class="temp">{{temperatur['RaumHinten']}}</td>
+        </tr>
+    </table>
+    <hr>
+    <h2> Einstellungen </h2>
+    <form name="sollTempForm" class="inputForm">
+        <label>Solltemperatur:
+        <input name="sollTemp" ng-model="sollTemp">
+    </label><br/>
+    <label>Nachtabkühlung aktiv:
+        <input type="checkbox" ng-model="NAK">
+    </label><br/>
+    <label>Solltemperatur Nachtabkühlung:
+        <input name="sollTemp" ng-model="sollTempNAK">
+    </label><br/>
+    </form>
+    <br/>
+    <a href="#Stufe1" ng-controller="MainCtrl" ng-click="logout()" onclick="return false;" class="btn">Logout</a>
+  </body>
+</html>
