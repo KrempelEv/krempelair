@@ -210,9 +210,3 @@ def air_set_NAK(NAK):
     fp = open("/opt/krempel/share/NAK.pkl","wb")
     pickle.dump(shared, fp)
     return api_response(NAK,200)
-
-def air_login(user,key):
-    """"""
-    var a = str(user + key)
-    return api_response(a,200)
-    
