@@ -10,10 +10,9 @@ KrempelAirApp.config(function ($routeProvider) {
   $routeProvider
       .when('/', {
         templateUrl: '../views/air.html',
-        controller: 'MainCtrl'
+        controller: 'AirFlowController'
       })
       .when('/login', {
-        //template: '<form ng-submit="login()" name="loginForm"> username: <input type="text" ng-model="user.username"> <br/> password: <input type="password" ng-model="user.password"><button>login</button></form>',
         templateUrl: '../views/login.html',
         controller: 'LoginCtrl'
       })
@@ -62,6 +61,16 @@ KrempelAirApp.factory('Auth', function ($rootScope, $window, $http) {
   };
 })
 
+KrempelAirApp.run(['$window', '$rootScope', '$location', 'Auth', function ($window, $rootScope, $location, Auth) {
+
+    $rootScope.$on("$routeChangeStart", function (event) {
+      if (!Auth.isLoggedIn() &&
+          $location.path() !== '/login') {
+        $location.path('/login');
+      }
+    });
+}]);
+
 KrempelAirApp.controller('LoginCtrl', function ($scope, Auth, $location, $http) {
   $scope.user = {};
 
@@ -81,17 +90,6 @@ KrempelAirApp.controller('MainCtrl', function ($scope, Auth, $location) {
     $location.path('/somewhere');
   };
 })
-
-KrempelAirApp.run(['$window', '$rootScope', '$location', 'Auth', function ($window, $rootScope, $location, Auth) {
-
-    $rootScope.$on("$routeChangeStart", function (event) {
-      if (!Auth.isLoggedIn() &&
-          $location.path() !== '/login') {
-        $location.path('/login');
-      }
-    });
-}]);
-
 
 KrempelAirApp.controller('AirFlowController', function AirFlowController($scope, $http, $timeout) {
 
