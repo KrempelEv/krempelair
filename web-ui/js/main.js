@@ -97,11 +97,6 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
     $scope.Refresh = function(){
         $http.get(uri+"/").then(function (response) {
             $scope.status = response.data;
-            if($scope.NAK && ($scope.NAK !== response.data["NAK"])){
-                $http.get(uri+"lueftung/NAK/"+$scope.NAK);
-            }else{
-                $scope.NAK = response.data["NAK"];
-            }
         });
         $http.get(uri+"/stoerung").then(function (response) {
             $scope.stoerung = response.data;
@@ -128,6 +123,10 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
     $scope.Klick = function(Klick){
         $http.get(uri+"/lueftung/stufe/"+Klick);
         $scope.Refresh();
+    }
+    
+    $scope.updateNAK = function(){
+      console.log("clicked");
     }
 
     $scope.Refresh();
