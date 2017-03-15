@@ -133,8 +133,11 @@ def _sys_get_NAK():
     """"""
     fp = open("/opt/krempel/share/NAK.pkl", "rb")
     sh = pickle.load(fp)
-    NAK = int(sh["NAK"])
-    return NAK
+    NAKvalue = int(sh["NAK"])
+    if(NAKvalue == 1):
+        return True
+    else:
+        return False
 
 def _sys_get_tempNAK():
     """"""
