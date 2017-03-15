@@ -126,7 +126,11 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
     }
     
     $scope.updateNAK = function(){
-      console.log("clicked");
+      if($scope.NAK){
+        $http.get(uri+"/lueftung/NAK/1");
+      }else{
+        $http.get(uri+"/lueftung/NAK/0");
+      }
     }
 
     $scope.Refresh();
