@@ -93,7 +93,7 @@
         <input name="sollTemp" ng-model="sollTemp">
     </label><br/>
     <label>Nachtabkühlung aktiv:
-        <input type="checkbox" ng-model="NAK" ng-click="updateNAK()">
+        <input type="checkbox" ng-model="NAK" ng-click="updateNAK()" ng-checked={{status['NAK']}}>
     </label><br/>
     <label>Solltemperatur Nachtabkühlung:
         <input name="sollTemp" ng-model="sollTempNAK">
