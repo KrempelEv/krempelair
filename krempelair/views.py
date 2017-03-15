@@ -86,7 +86,7 @@ def _sys_get_temperaturen():
                     "FOL" : 0,
                     "AUL" : 0,
                     "RaumVorne" : 0,
-                    "RaumHinten" : 0,
+                    "TempWitt" : 0,
                     "TempSoll" : 0,
                     "TempSollNAK": 0}
     # Werte holen
@@ -101,8 +101,8 @@ def _sys_get_temperaturen():
     tempAUL = round(-30.0 + (float(wertAUL)/1024)*100.0,1)
     wertRaumVorne = analogIn.getValue(0x09,0x00)
     tempRaumVorne = round((float(wertRaumVorne)/1024)*50.0,1)
-    wertRaumHinten = analogIn.getValue(0x08,0x01)
-    tempRaumHinten = round((float(wertRaumHinten)/1024)*50.0,1)
+    wertTempWitt = analogIn.getValue(0x08,0x01)
+    tempWitt = round(-30.0 + (float(wertTempWitt)/1024)*100.0,1)
     tempSoll = _sys_get_tempSoll()
     tempSollNAK = _sys_get_tempNAK()
     # Zuweisen in JSON
@@ -111,7 +111,7 @@ def _sys_get_temperaturen():
     temperaturen["FOL"] = tempFOL
     temperaturen["AUL"] = tempAUL
     temperaturen["RaumVorne"] = tempRaumVorne
-    temperaturen["RaumHinten"] = tempRaumHinten
+    temperaturen["TempWitt"] = tempWitt
     temperaturen["TempSoll"] = tempSoll
     temperaturen["TempSollNAK"] = tempSollNAK
     return temperaturen
