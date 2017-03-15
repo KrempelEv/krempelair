@@ -21,6 +21,20 @@ KrempelAirApp.config(function ($routeProvider) {
       });
 })
 
+KrempelAirApp.directive('selectOnClick', ['$window', function ($window) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.on('click', function () {
+                if (!$window.getSelection().toString()) {
+                    // Required for mobile Safari
+                    this.setSelectionRange(0, this.value.length)
+                }
+            });
+        }
+    };
+}]);
+
 KrempelAirApp.factory('Auth', function ($rootScope, $window, $http) {
   return {
     login: function (user, successHandler, errorHandler) {
