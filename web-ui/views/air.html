@@ -90,13 +90,13 @@
     <h2> Einstellungen </h2>
     <form name="sollTempForm" class="inputForm">
         <label>Solltemperatur:
-        <input name="sollTemp" ng-model="sollTemp" ng-click="this.select();">
+        <input name="sollTemp" ng-model="sollTemp" select-on-click/>
     </label><br/>
     <label>Nachtabkühlung aktiv:
-        <input type="checkbox" ng-model="NAK" ng-click="updateNAK()" ng-checked={{status["NAK"]}}>
+        <input type="checkbox" ng-model="NAK" ng-click="updateNAK()" ng-checked={{status["NAK"]}}/>
     </label><br/>
     <label>Solltemperatur Nachtabkühlung:
-        <input name="sollTemp" ng-model="sollTempNAK" ng-click="this.select();">
+        <input name="sollTemp" ng-model="sollTempNAK" select-on-click/>
     </label><br/>
     </form>
     <br/>
