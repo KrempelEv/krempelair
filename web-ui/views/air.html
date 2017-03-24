@@ -89,15 +89,21 @@
     <hr>
     <h2> Einstellungen </h2>
     <form name="sollTempForm" class="inputForm">
-        <label>Solltemperatur:
+      <label>Solltemperatur:
         <input name="sollTemp" ng-model="sollTemp" select-on-click/>
-    </label><br/>
-    <label>Nachtabkühlung aktiv:
+      </label><br/>
+      <label>Nachtabkühlung aktiv:
         <input type="checkbox" ng-model="NAK" ng-click="updateNAK()" ng-checked="{{status['NAK']}}"/>
-    </label><br/>
-    <label>Solltemperatur Nachtabkühlung:
+      </label><br/>
+      <label>Solltemperatur Nachtabkühlung:
         <input name="sollTemp" ng-model="sollTempNAK" select-on-click/>
-    </label><br/>
+      </label><br/>
+      <label>Temperatur Zuluft Maximal:
+        <input name="sollTemp" ng-model="tempZulMax" select-on-click/>
+      </label><br/>
+      <label>Temperatur Zuluft Minimal:
+        <input name="sollTemp" ng-model="tempZulMin" select-on-click/>
+      </label><br/>
     </form>
     <br/>
     <a href="#Stufe1" ng-controller="MainCtrl" ng-click="logout()" onclick="return false;" class="btn">Logout</a>
