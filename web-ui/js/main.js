@@ -117,15 +117,29 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         });
         $http.get(uri+"/lueftung/temperatur").then(function (response) {
             $scope.temperatur = response.data;
+            // sollTemp
             if($scope.sollTemp && (parseFloat(parseFloat($scope.sollTemp).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSoll"]).toFixed(2)))){
                 $http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
             }else{
                 $scope.sollTemp = response.data["TempSoll"];
             }
+            // sollTempNAK
             if($scope.sollTempNAK && (parseFloat(parseFloat($scope.sollTempNAK).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSollNAK"]).toFixed(2)))){
                 $http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTempNAK));
             }else{
                 $scope.sollTempNAK = response.data["TempSollNAK"];
+            }
+            // tempZulMax
+            if($scope.tempZulMax && (parseFloat(parseFloat($scope.tempZulMax).toFixed(2)) !== parseFloat(parseFloat(response.data["tempZulMax"]).toFixed(2)))){
+                $http.get(uri+"/lueftung/temperatur/tempZulMax/"+parseFloat($scope.tempZulMax));
+            }else{
+                $scope.tempZulMax = response.data["tempZulMax"];
+            }
+            // tempZulMin
+            if($scope.tempZulMin && (parseFloat(parseFloat($scope.tempZulMin).toFixed(2)) !== parseFloat(parseFloat(response.data["tempZulMin"]).toFixed(2)))){
+                $http.get(uri+"/lueftung/temperatur/tempZulMin/"+parseFloat($scope.tempZulMin));
+            }else{
+                $scope.tempZulMin = response.data["tempZulMin"];
             }
         });
 
