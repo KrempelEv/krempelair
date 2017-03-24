@@ -154,14 +154,14 @@ def _sys_get_tempZulMax():
     """"""
     fp = open("/opt/krempel/share/tempZulMax.pkl", "rb")
     sh = pickle.load(fp)
-    tempZulMax = float(sh["TempNAK"])
+    tempZulMax = float(sh["tempZulMax"])
     return tempZulMax
 
 def _sys_get_tempZulMin():
     """"""
     fp = open("/opt/krempel/share/tempZulMin.pkl", "rb")
     sh = pickle.load(fp)
-    tempZulMin = float(sh["TempNAK"])
+    tempZulMin = float(sh["tempZulMin"])
     return tempZulMin
 
 # API Functions
