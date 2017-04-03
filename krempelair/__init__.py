@@ -50,11 +50,11 @@ class Krempelair(flask.Flask):
             # Setters für Funktionen
             ('air_set_level', '/lueftung/stufe/<int:level>'),
             ('air_set_timer', '/lueftung/timer/<int:time>'),
-            ('air_set_tempSoll', '/lueftung/temperatur/sollTemp/<int:temp>'),
-            ('air_set_tempNAK', '/lueftung/temperatur/sollTempNAK/<int:temp>'),
+            ('air_set_tempSoll', '/lueftung/temperatur/sollTemp/<float:temp>'),
+            ('air_set_tempNAK', '/lueftung/temperatur/sollTempNAK/<float:temp>'),
             ('air_set_NAK', '/lueftung/NAK/<int:NAK>'),
-            ('air_set_tempZulMax', '/lueftung/temperatur/tempZulMax/<int:temp>'),
-            ('air_set_tempZulMin', '/lueftung/temperatur/tempZulMin/<int:temp>'),
+            ('air_set_tempZulMax', '/lueftung/temperatur/tempZulMax/<float:temp>'),
+            ('air_set_tempZulMin', '/lueftung/temperatur/tempZulMin/<float:temp>'),
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
 
