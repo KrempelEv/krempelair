@@ -105,8 +105,6 @@ def _sys_get_temperaturen():
     tempWitt = round(-30.0 + (float(wertTempWitt)/1024)*100.0,1)
     tempSoll = _sys_get_tempSoll()
     tempSollNAK = _sys_get_tempNAK()
-    tempZulMax = _sys_get_tempZulMax()
-    tempZulMin = _sys_get_tempZulMin()
     # Zuweisen in JSON
     temperaturen["ZUL"] = tempZUL
     temperaturen["ABL"] = tempABL
@@ -149,20 +147,6 @@ def _sys_get_tempNAK():
     sh = pickle.load(fp)
     tempSollNAK = float(sh["TempNAK"])
     return tempSollNAK
-
-def _sys_get_tempZulMax():
-    """"""
-    fp = open("/opt/krempel/share/tempZulMax.pkl", "rb")
-    sh = pickle.load(fp)
-    tempZulMax = float(sh["tempZulMax"])
-    return tempZulMax
-
-def _sys_get_tempZulMin():
-    """"""
-    fp = open("/opt/krempel/share/tempZulMin.pkl", "rb")
-    sh = pickle.load(fp)
-    tempZulMin = float(sh["tempZulMin"])
-    return tempZulMin
 
 # API Functions
 def air_get_status_stoerung():
@@ -231,17 +215,3 @@ def air_set_NAK(NAK):
     fp = open("/opt/krempel/share/NAK.pkl","wb")
     pickle.dump(shared, fp)
     return api_response(NAK,200)
-
-def air_set_tempZulMax(temp):
-    """"""
-    shared = {"tempZulMax":str(temp)}
-    fp = open("/opt/krempel/share/tempZulMax.pkl","wb")
-    pickle.dump(shared, fp)
-    return api_response(temp,200)
-
-def air_set_tempZulMin(temp):
-    """"""
-    shared = {"tempZulMin":str(temp)}
-    fp = open("/opt/krempel/share/tempZulMin.pkl","wb")
-    pickle.dump(shared, fp)
-    return api_response(temp,200)
