@@ -114,8 +114,6 @@ def _sys_get_temperaturen():
     temperaturen["TempWitt"] = tempWitt
     temperaturen["TempSoll"] = tempSoll
     temperaturen["TempSollNAK"] = tempSollNAK
-    temperaturen["tempZulMax"] = tempZulMax
-    temperaturen["tempZulMin"] = tempZulMin
     return temperaturen
 
 def _sys_set_status(pin,state):
