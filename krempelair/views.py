@@ -125,11 +125,6 @@ def _sys_set_status(pin,state):
 
 def _sys_get_tempSoll():
     """"""
-    #fp = open("/opt/krempel/share/temp.pkl", "rb")
-    #sh = pickle.load(fp)
-    #tempSoll = float(sh["Temp"])
-    #return tempSoll
-
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
     c.execute("SELECT value FROM sollwerte WHERE key LIKE '%tempSoll';")
@@ -151,10 +146,13 @@ def _sys_get_NAK():
 
 def _sys_get_tempNAK():
     """"""
-    fp = open("/opt/krempel/share/tempNAK.pkl", "rb")
-    sh = pickle.load(fp)
-    tempSollNAK = float(sh["TempNAK"])
-    return tempSollNAK
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    c.execute("SELECT value FROM sollwerte WHERE key LIKE '%tempSollNAK';")
+    value = c.fetchone()[0]
+    conn.commit()
+    conn.close()
+    return(value)
 
 # API Functions
 def air_get_status_stoerung():
