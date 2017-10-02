@@ -198,7 +198,7 @@ def air_set_tempSoll(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO sollwerte VALUES (?,?)','tempSoll',temp)
+    c.execute('INSERT INTO sollwerte VALUES (?,?)',['tempSoll',temp])
     conn.commit()
     conn.close()
     return api_response(temp,200)
@@ -207,7 +207,7 @@ def air_set_tempNAK(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO sollwerte VALUES (?,?)','tempSollNAK',temp)
+    c.execute('INSERT INTO sollwerte VALUES (?,?)',['tempSollNAK',temp])
     conn.commit()
     conn.close()
     return api_response(temp,200)
@@ -216,7 +216,7 @@ def air_set_NAK(NAK):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO nak VALUES (?,?)','nak',NAK)
+    c.execute('INSERT INTO nak VALUES (?,?)',['nak',NAK])
     conn.commit()
     conn.close()
     return api_response(temp,200)
