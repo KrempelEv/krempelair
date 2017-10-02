@@ -130,6 +130,14 @@ def _sys_get_tempSoll():
     tempSoll = float(sh["Temp"])
     return tempSoll
 
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO sollwerte VALUES (?,?)',['tempSollNAK',temp])
+    c.execute('SELECT value FROM sollwerte where key=tempSoll limit=1')
+    print(c.fetchone())
+    conn.commit()
+    conn.close()
+
 def _sys_get_NAK():
     """"""
     fp = open("/opt/krempel/share/NAK.pkl", "rb")
@@ -198,7 +206,7 @@ def air_set_tempSoll(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO sollwerte VALUES (?,?)',['tempSoll',temp])
+    c.execute('UPDATE sollwerte SET value = ? WHERE key = tempSoll',temp)
     conn.commit()
     conn.close()
     return api_response(temp,200)
@@ -207,7 +215,7 @@ def air_set_tempNAK(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO sollwerte VALUES (?,?)',['tempSollNAK',temp])
+    c.execute('UPDATE sollwerte SET value = ? WHERE key = tempSollNAK',temp)
     conn.commit()
     conn.close()
     return api_response(temp,200)
