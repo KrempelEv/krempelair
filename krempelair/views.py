@@ -199,7 +199,7 @@ def air_set_tempSoll(temp):
     print('hello')
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute("INSERT INTO sollwerte VALUES ('tempSoll',?)",temp)
+    c.execute("INSERT INTO sollwerte VALUES ('tempSoll',23.3)")
     conn.commit()
     conn.close()
     return api_response(temp,200)
