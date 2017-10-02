@@ -129,18 +129,6 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
             }else{
                 $scope.sollTempNAK = response.data["TempSollNAK"];
             }
-            // tempZulMax
-            if($scope.tempZulMax && (parseFloat(parseFloat($scope.tempZulMax).toFixed(2)) !== parseFloat(parseFloat(response.data["tempZulMax"]).toFixed(2)))){
-                $http.get(uri+"/lueftung/temperatur/tempZulMax/"+parseFloat($scope.tempZulMax));
-            }else{
-                $scope.tempZulMax = response.data["tempZulMax"];
-            }
-            // tempZulMin
-            if($scope.tempZulMin && (parseFloat(parseFloat($scope.tempZulMin).toFixed(2)) !== parseFloat(parseFloat(response.data["tempZulMin"]).toFixed(2)))){
-                $http.get(uri+"/lueftung/temperatur/tempZulMin/"+parseFloat($scope.tempZulMin));
-            }else{
-                $scope.tempZulMin = response.data["tempZulMin"];
-            }
         });
 
 
