@@ -21,4 +21,4 @@ class analogInOut():
         HBy = int(a/256)
         LBy = int(a-HBy*256)
         field=[LBy,HBy]
-        bus.write_i2c_block_data(address,chanel,field)
+        self._bus.write_i2c_block_data(address,chanel,field)
