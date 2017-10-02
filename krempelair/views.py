@@ -138,10 +138,11 @@ def _sys_get_NAK():
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute("SELECT value FROM nak WHERE key LIKE '%nak';")
-    NAKvalue = int(c.fetchone()[0])
+    #c.execute("SELECT value FROM nak WHERE key LIKE '%nak';")
+    #NAKvalue = int(c.fetchone()[0])
     conn.commit()
     conn.close()
+    NAKvalue = 1
     if(NAKvalue == 1):
         return True
     else:
