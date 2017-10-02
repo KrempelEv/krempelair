@@ -53,8 +53,6 @@ class Krempelair(flask.Flask):
             ('air_set_tempSoll', '/lueftung/temperatur/sollTemp/<float:temp>'),
             ('air_set_tempNAK', '/lueftung/temperatur/sollTempNAK/<float:temp>'),
             ('air_set_NAK', '/lueftung/NAK/<int:NAK>'),
-            ('air_set_tempZulMax', '/lueftung/temperatur/tempZulMax/<float:temp>'),
-            ('air_set_tempZulMin', '/lueftung/temperatur/tempZulMin/<float:temp>'),
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
 
