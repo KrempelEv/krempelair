@@ -196,6 +196,7 @@ def air_set_timer(time):
 
 def air_set_tempSoll(temp):
     """"""
+    print('hello')
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
     c.execute("INSERT INTO sollwerte VALUES ('tempSoll',?)",temp)
