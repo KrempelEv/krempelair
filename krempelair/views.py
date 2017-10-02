@@ -206,7 +206,7 @@ def air_set_tempSoll(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute("UPDATE sollwerte SET value = ? WHERE key LIKE '%tempSoll';",temp)
+    c.execute("UPDATE sollwerte SET value = 22.2 WHERE key LIKE '%tempSoll';",temp)
     conn.commit()
     conn.close()
     return api_response(temp,200)
@@ -215,7 +215,7 @@ def air_set_tempNAK(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute("UPDATE sollwerte SET value = ? WHERE key LIKE '%tempSollNAK';",temp)
+    c.execute("UPDATE sollwerte SET value = 23.3 WHERE key LIKE '%tempSollNAK';",temp)
     conn.commit()
     conn.close()
     return api_response(temp,200)
