@@ -15,8 +15,8 @@ class analogInOut():
         val = var[2]*256+var[1]                                   #Berechnung der korrekten Zahlenwerte aus dem Array
         log.debug("Analogwert von Adresse "+str(address)+ " mit Kanal " +str(chanel) +" mit Wert "+ str(val))    #Ausgabe in der Python Shell
         return val
-    
-     def setValue(self, address, chanel, value):
+
+    def setValue(self, address, chanel, value):
         a=int(value)
         HBy = int(a/256)
         LBy = int(a-HBy*256)
