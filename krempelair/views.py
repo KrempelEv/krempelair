@@ -133,7 +133,7 @@ def _sys_get_tempSoll():
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
     c.execute("SELECT value FROM sollwerte WHERE key LIKE '%tempSoll';")
-    value = c.fetchone()
+    value = c.fetchone()[0]
     conn.commit()
     conn.close()
     return(value)
