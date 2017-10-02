@@ -196,7 +196,6 @@ def air_set_timer(time):
 
 def air_set_tempSoll(temp):
     """"""
-    print('hello')
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
     c.execute('INSERT INTO sollwerte VALUES (?,?)','tempSoll',temp)
@@ -204,21 +203,20 @@ def air_set_tempSoll(temp):
     conn.close()
     return api_response(temp,200)
 
-    #shared = {"Temp":str(temp)}
-    #fp = open("/opt/krempel/share/temp.pkl","wb")
-    #pickle.dump(shared, fp)
-
-
 def air_set_tempNAK(temp):
     """"""
-    shared = {"TempNAK":str(temp)}
-    fp = open("/opt/krempel/share/tempNAK.pkl","wb")
-    pickle.dump(shared, fp)
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO sollwerte VALUES (?,?)','tempSollNAK',temp)
+    conn.commit()
+    conn.close()
     return api_response(temp,200)
 
 def air_set_NAK(NAK):
     """"""
-    shared = {"NAK":str(NAK)}
-    fp = open("/opt/krempel/share/NAK.pkl","wb")
-    pickle.dump(shared, fp)
-    return api_response(NAK,200)
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO nak VALUES (?,?)','nak',NAK)
+    conn.commit()
+    conn.close()
+    return api_response(temp,200)
