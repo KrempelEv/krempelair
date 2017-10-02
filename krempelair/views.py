@@ -125,18 +125,18 @@ def _sys_set_status(pin,state):
 
 def _sys_get_tempSoll():
     """"""
-    fp = open("/opt/krempel/share/temp.pkl", "rb")
-    sh = pickle.load(fp)
-    tempSoll = float(sh["Temp"])
-    return tempSoll
+    #fp = open("/opt/krempel/share/temp.pkl", "rb")
+    #sh = pickle.load(fp)
+    #tempSoll = float(sh["Temp"])
+    #return tempSoll
 
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO sollwerte VALUES (?,?)',['tempSollNAK',temp])
-    c.execute('SELECT value FROM sollwerte where key=tempSoll limit=1')
-    print(c.fetchone())
+    c.execute("SELECT value FROM sollwerte WHERE key LIKE '%tempSoll';")
     conn.commit()
     conn.close()
+    return(c.fetchone())
+
 
 def _sys_get_NAK():
     """"""
