@@ -6,6 +6,7 @@ import sys
 import json
 import smbus
 import pickle
+import sqlite3
 
 
 from flask import request, render_template, current_app, url_for, make_response
@@ -195,6 +196,9 @@ def air_set_timer(time):
 
 def air_set_tempSoll(temp):
     """"""
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO sollwerte VALUES ('tempSoll',?)",temp)
     shared = {"Temp":str(temp)}
     fp = open("/opt/krempel/share/temp.pkl","wb")
     pickle.dump(shared, fp)
