@@ -202,11 +202,12 @@ def air_set_tempSoll(temp):
     c.execute("INSERT INTO sollwerte VALUES ('tempSoll',?)",temp)
     conn.commit()
     conn.close()
-    
-    shared = {"Temp":str(temp)}
-    fp = open("/opt/krempel/share/temp.pkl","wb")
-    pickle.dump(shared, fp)
     return api_response(temp,200)
+
+    #shared = {"Temp":str(temp)}
+    #fp = open("/opt/krempel/share/temp.pkl","wb")
+    #pickle.dump(shared, fp)
+
 
 def air_set_tempNAK(temp):
     """"""
