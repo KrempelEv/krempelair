@@ -219,4 +219,4 @@ def air_set_NAK(NAK):
     c.execute('INSERT INTO nak VALUES (?,?)',['nak',NAK])
     conn.commit()
     conn.close()
-    return api_response(temp,200)
+    return api_response(NAK,200)
