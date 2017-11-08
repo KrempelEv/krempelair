@@ -71,6 +71,8 @@ processes=2
 threads=2
 mount = /api=uwsgi.py
 manage-script-name=true
+uid=root
+gid=root
 ```
 
 ## This is the end my Friend
