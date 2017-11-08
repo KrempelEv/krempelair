@@ -174,6 +174,17 @@ def air_get_temperaturen():
     temperaturen = _sys_get_temperaturen()
     return api_response(temperaturen)
 
+def air_set_wrg(level):
+    """"""
+    analogPins = analogInOut()
+    analogPins.setValue(0x58,0x00,level)
+
+def air_set_le(level):
+    """"""
+    analogPins = analogInOut()
+    analogPins.setValue(0x58,0x01,level)
+
+    
 
 def air_set_level(level):
     """"""
