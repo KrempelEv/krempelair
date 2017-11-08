@@ -178,11 +178,13 @@ def air_set_wrg(level):
     """"""
     analogPins = analogInOut()
     analogPins.setValue(0x58,0x00,level)
+    return api_response(level)
 
 def air_set_le(level):
     """"""
     analogPins = analogInOut()
     analogPins.setValue(0x58,0x01,level)
+    return api_response(level)
 
     
 
