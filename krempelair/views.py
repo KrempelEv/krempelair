@@ -176,12 +176,20 @@ def air_get_temperaturen():
 
 def air_set_wrg(level):
     """"""
+    if(level>1023):
+        level = 1023
+    if(level<0):
+        level = 0
     analogPins = analogInOut()
     analogPins.setValue(0x58,0x00,level)
     return api_response(level)
 
 def air_set_le(level):
     """"""
+    if(level>1023):
+        level = 1023
+    if(level<0):
+        level = 0
     analogPins = analogInOut()
     analogPins.setValue(0x58,0x01,level)
     return api_response(level)
