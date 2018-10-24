@@ -10,7 +10,7 @@ class analogInOut():
     def __init__(self):
         self._bus = smbus.SMBus(1)
         LOG_FILENAME = 'krempelair.log'
-        logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
+        log.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
     def getValue(self, address, chanel):
         var = self._bus.read_i2c_block_data(address,chanel,11)    #Werte von Board in 11 stelliges Array schreiben
         val = var[2]*256+var[1]                                   #Berechnung der korrekten Zahlenwerte aus dem Array
