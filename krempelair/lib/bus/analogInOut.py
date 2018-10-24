@@ -12,7 +12,7 @@ class analogInOut():
 
     def getValue(self, address, chanel):
         var = self._bus.read_i2c_block_data(address,chanel,11)    #Werte von Board in 11 stelliges Array schreiben
-        val = var[2]*256+var[1]                                   #Berechnung der korrekten Zahlenwerte aus dem Array
+        val = var[2]*256+var[3]                                   #Berechnung der korrekten Zahlenwerte aus dem Array
         log.debug("Analogwert von Adresse "+str(address)+ " mit Kanal " +str(chanel) +" mit Wert "+ str(val))    #Ausgabe in der Python Shell
         return val
 
