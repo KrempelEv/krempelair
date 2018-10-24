@@ -119,24 +119,14 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
             $scope.temperatur = response.data;
             
             // sollTemp
-            if($scope.sollTemp && (parseFloat(parseFloat($scope.sollTemp).toFixed(2))) !== parseFloat(parseFloat(response.data["TempSoll"]).toFixed(2))){
-                //$http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
-                document.getElementById("sollTemp").style.backgroundColor = "yellow";
-            }else{
-                $scope.sollTemp = response.data["TempSoll"];
-                document.getElementById("sollTemp").style.backgroundColor = "green"
-
+            if(!$scope.sollTemp){
+              $scope.sollTemp = response.data["TempSoll"];
             }
 
             // sollTempNAK
-            if($scope.sollTempNAK && (parseFloat(parseFloat($scope.sollTempNAK).toFixed(2))) !== parseFloat(parseFloat(response.data["TempSollNAK"]).toFixed(2))){
-                //$http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTempNAK));
-                document.getElementById("sollTempNAK").style.backgroundColor = "yellow";
-            }else{
-                $scope.sollTempNAK = response.data["TempSollNAK"];
-                document.getElementById("sollTempNAK").style.backgroundColor = "green"
+            if(!$scope.sollTempNAK){
+               $scope.sollTempNAK = response.data["TempSoll"];
             }
-            
         });
 
 
@@ -151,13 +141,11 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
   
     $scope.SolltempClick = function(){
       $http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
-      document.getElementById("sollTemp").style.backgroundColor = "green"
       alert("Gespeichert")
     }
     
     $scope.NAKClick = function(){
       $http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTempNAK));
-      document.getElementById("sollTempNAK").style.backgroundColor = "green"
       alert("Gespeichert")
     }
   
