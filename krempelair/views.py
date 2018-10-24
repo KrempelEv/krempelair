@@ -92,13 +92,13 @@ def _sys_get_temperaturen():
                     "TempSollNAK": 0}
     # Werte holen
     analogIn = analogInOut()
-    wertZUL = analogIn.getValue(0x08,0x00)
+    wertZUL = analogIn.getValue(0x08,0x01)
     tempZUL = round((float(wertZUL)/1024)*50,1)
-    wertABL = analogIn.getValue(0x08,0x01)
+    wertABL = analogIn.getValue(0x08,0x02)
     tempABL = round((float(wertABL)/1024)*50,1)
-    wertFOL = analogIn.getValue(0x08,0x02)
+    wertFOL = analogIn.getValue(0x08,0x03)
     tempFOL = round((float(wertFOL)/1024)*50,1)
-    wertAUL = analogIn.getValue(0x08,0x03)
+    wertAUL = analogIn.getValue(0x08,0x04)
     tempAUL = round(-30.0 + (float(wertAUL)/1024)*100.0,1)
     wertRaumVorne = analogIn.getValue(0x09,0x00)
     tempRaumVorne = round((float(wertRaumVorne)/1024)*50.0,1)
