@@ -121,7 +121,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
             $scope.sollTempNAK = response.data["TempSollNAK"];
             
             // sollTemp
-            if((parseFloat(parseFloat($scope.sollTemp).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSoll"]).toFixed(2))){
+            if((parseFloat(parseFloat($scope.sollTemp).toFixed(2))) !== parseFloat(parseFloat(response.data["TempSoll"]).toFixed(2))){
                 //$http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
                 document.getElementById("sollTemp").style.backgroundColor = "yellow";
             }else{
@@ -129,7 +129,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
             }
 
             // sollTempNAK
-            if((parseFloat(parseFloat($scope.sollTempNAK).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSollNAK"]).toFixed(2))){
+            if((parseFloat(parseFloat($scope.sollTempNAK).toFixed(2))) !== parseFloat(parseFloat(response.data["TempSollNAK"]).toFixed(2))){
                 //$http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTempNAK));
                 document.getElementById("sollTempNAK").style.backgroundColor = "yellow";
             }else{
