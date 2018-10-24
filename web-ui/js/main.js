@@ -117,18 +117,23 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         });
         $http.get(uri+"/lueftung/temperatur").then(function (response) {
             $scope.temperatur = response.data;
+            $scope.sollTemp = response.data["TempSoll"];
+            $scope.sollTempNAK = response.data["TempSollNAK"];
+            /*
             // sollTemp
             if($scope.sollTemp && (parseFloat(parseFloat($scope.sollTemp).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSoll"]).toFixed(2)))){
                 $http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
             }else{
                 $scope.sollTemp = response.data["TempSoll"];
-            }
+            //}
+
             // sollTempNAK
             if($scope.sollTempNAK && (parseFloat(parseFloat($scope.sollTempNAK).toFixed(2)) !== parseFloat(parseFloat(response.data["TempSollNAK"]).toFixed(2)))){
                 $http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTempNAK));
             }else{
                 $scope.sollTempNAK = response.data["TempSollNAK"];
             }
+            */
         });
 
 
@@ -142,10 +147,12 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
     }
   
     $scope.SolltempClick = function(){
+      $http.get(uri+"/lueftung/temperatur/sollTemp/"+parseFloat($scope.sollTemp));
       alert("Gespeichert")
     }
     
     $scope.NAKClick = function(){
+      $http.get(uri+"/lueftung/temperatur/sollTempNAK/"+parseFloat($scope.sollTempNAK));
       alert("Gespeichert")
     }
     $scope.updateNAK = function(){
