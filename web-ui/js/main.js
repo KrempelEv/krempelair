@@ -125,7 +125,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
 
             // sollTempNAK
             if(!$scope.sollTempNAK){
-               $scope.sollTempNAK = response.data["TempSoll"];
+               $scope.sollTempNAK = response.data["TempSollNAK"];
             }
         });
 
