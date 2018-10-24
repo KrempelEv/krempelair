@@ -140,7 +140,14 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
         $http.get(uri+"/lueftung/stufe/"+Klick);
         $scope.Refresh();
     }
+  
+    $scope.SolltempClick = function(){
+      alert("Gespeichert")
+    }
     
+    $scope.NAKClick = function(){
+      alert("Gespeichert")
+    }
     $scope.updateNAK = function(){
       if($scope.NAK){
         $http.get(uri+"/lueftung/NAK/1");
