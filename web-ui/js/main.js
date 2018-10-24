@@ -124,6 +124,8 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
                 document.getElementById("sollTemp").style.backgroundColor = "yellow";
             }else{
                 $scope.sollTemp = response.data["TempSoll"];
+                document.getElementById("sollTemp").style.backgroundColor = "green"
+
             }
 
             // sollTempNAK
@@ -132,6 +134,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
                 document.getElementById("sollTempNAK").style.backgroundColor = "yellow";
             }else{
                 $scope.sollTempNAK = response.data["TempSollNAK"];
+                document.getElementById("sollTempNAK").style.backgroundColor = "green"
             }
             
         });
