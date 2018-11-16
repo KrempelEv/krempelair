@@ -62,7 +62,7 @@ class Krempelair(flask.Flask):
             ('air_log_tempIst', '/lueftung/log/tempIst/<float:temp>'),
             ('air_log_tempIst', '/lueftung/log/tempIst/<int:temp>'),
             ('air_get_trend_tempIst', '/lueftung/log/tempIst'),
-            ('air_get_trend_tempIst', '/lueftung/log/tempSoll'),
+            ('air_get_trend_tempSoll', '/lueftung/log/tempSoll'),
 
         ]:
             self.add_url_rule(rule, view_func=getattr(views, endpoint))
