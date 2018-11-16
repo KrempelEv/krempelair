@@ -263,3 +263,23 @@ def air_log_tempIst(temp):
     conn.commit()
     conn.close()
     return api_response(temp,200)
+
+def air_get_trend_tempIst():
+    """"""
+    time_from  = request.args.get('from', None)
+    time_to  = request.args.get('to', None)
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    c.execute("SELECT value, logtime FROM trend WHERE key LIKE 'tempSoll' logtime > ? AND logtime < ?",[time_from,time_to])
+    conn.commit()
+    conn.close()
+    return api_response(time_from+time_to,200)
+
+def air_get_trend_tempSoll():
+    """"""
+    conn = sqlite3.connect('/opt/krempel/share/data.db')
+    c = conn.cursor()
+    #c.execute('INSERT INTO trend (key, value) VALUES (?,?)',['tempSoll',temp])
+    conn.commit()
+    conn.close()
+    return api_response(temp,200)
