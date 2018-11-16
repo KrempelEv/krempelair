@@ -255,7 +255,7 @@ def air_set_NAK(NAK):
     conn.close()
     return api_response(NAK,200)
 
-def air_log_tempIst(temp)
+def air_log_tempIst(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
