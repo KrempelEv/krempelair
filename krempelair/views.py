@@ -259,7 +259,7 @@ def air_log_tempIst(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute('INSERT INTO trend VALUES (?,?)',['tempSoll',temp])
+    c.execute('INSERT INTO trend (key, value) VALUES (?,?)',['tempSoll',temp])
     conn.commit()
     conn.close()
     return api_response(temp,200)
