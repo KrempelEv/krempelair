@@ -230,7 +230,9 @@ def air_set_tempSoll(temp):
     """"""
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute("UPDATE sollwerte SET value = ? WHERE key='tempSoll';",(int(temp)))
+    #c.execute("UPDATE sollwerte SET value = ? WHERE key='tempSoll';",(int(temp)))
+    wert = 'tempSoll'
+    c.execute('''UPDATE sollwerte SET value = ? WHERE key = ?''', (temp, wert))
     conn.commit()
     conn.close()
     return api_response(temp,200)
