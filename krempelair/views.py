@@ -270,7 +270,7 @@ def air_get_trend_tempIst():
     time_to  = request.args.get('to', None)
     conn = sqlite3.connect('/opt/krempel/share/data.db')
     c = conn.cursor()
-    c.execute("SELECT value, logtime FROM trend WHERE key LIKE 'tempSoll' logtime > ? AND logtime < ?",[time_from,time_to])
+    c.execute("SELECT value, logtime FROM trend WHERE key LIKE 'tempSoll' AND logtime > ? AND logtime < ?",[time_from,time_to])
     conn.commit()
     conn.close()
     return api_response(time_from+time_to,200)
