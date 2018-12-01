@@ -107,9 +107,11 @@
     
     <script>
       
-Highcharts.chart('container', {
-  
-  chart: {
+
+
+// Create the chart
+Highcharts.stockChart('container', {
+    chart: {
         events: {
             load: function () {
 
@@ -124,51 +126,55 @@ Highcharts.chart('container', {
         }
     },
 
+    time: {
+        useUTC: false
+    },
+
+    rangeSelector: {
+        buttons: [{
+            count: 1,
+            type: 'minute',
+            text: '1M'
+        }, {
+            count: 5,
+            type: 'minute',
+            text: '5M'
+        }, {
+            type: 'all',
+            text: 'All'
+        }],
+        inputEnabled: false,
+        selected: 0
+    },
+
     title: {
-        text: 'Trend'
+        text: 'Live random data'
     },
 
-    yAxis: {
-        title: {
-            text: 'Temperatur [°C]'
-        }
+    exporting: {
+        enabled: false
     },
-    xAxis: {
-        type: 'datetime'
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-
-    plotOptions: {
-        
-    },
-  
 
     series: [{
-        name: 'Solltemperatur',
-    }, {
-        name: 'Isttemperatur',
-    }],
+        name: 'Random data',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
 
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
+            for (i = -999; i <= 0; i += 1) {
+                data.push([
+                    time + i * 1000,
+                    Math.round(Math.random() * 100)
+                ]);
             }
-        }]
-    }
-
+            return data;
+        }())
+    }]
 });
+
+
     </script>
     
     <a href="#Stufe1" ng-controller="MainCtrl" ng-click="logout()" onclick="return false;" class="btn">Logout</a>
