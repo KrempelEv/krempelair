@@ -1,5 +1,5 @@
 var KrempelAirApp = angular.module('KrempelAirApp', ['ngRoute']);
-var uri = "/api"
+var uri = "api"
 
 
 KrempelAirApp.config(['$locationProvider', function($locationProvider) {
@@ -10,11 +10,11 @@ KrempelAirApp.config(['$locationProvider', function($locationProvider) {
 KrempelAirApp.config(function ($routeProvider) {
   $routeProvider
       .when('/', {
-        templateUrl: '../views/air.html',
+        templateUrl: 'views/air.html',
         controller: 'AirFlowController'
       })
       .when('/login', {
-        templateUrl: '../views/login.html',
+        templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
       .otherwise({
@@ -133,7 +133,7 @@ KrempelAirApp.controller('AirFlowController', function AirFlowController($scope,
 
         $timeout(function(){
          $scope.Refresh();
-        },800);
+        },2000);
     }
     $scope.Klick = function(Klick){
         $http.get(uri+"/lueftung/stufe/"+Klick);
