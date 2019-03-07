@@ -7,7 +7,7 @@ To deploy Krempelair use The following Guide
 First of all Install the following Software Packages:
  * nginx-extras
  * uwsgi
- * uwsgi-python
+ * uwsgi-plugin-python
  * python-flask
  * git
 
