@@ -10,4 +10,10 @@ sudo /etc/init.d/regulation.sh stop
 
 
 
+
+apt-get update
+apt-get install i2c-tools      # I2C-Toolkit fuer die Kommandozeile
+apt-get install python-smbus   # Python-Bibliothek fuer I2C
+
+
 is coming soon...
