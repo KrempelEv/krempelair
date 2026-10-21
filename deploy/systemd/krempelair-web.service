@@ -1,0 +1,37 @@
+[Unit]
+Description=Krempelair Dashboard (Port 80, nur lesend)
+After=network.target krempelair-control.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+# eigener Benutzer: liest die Datenbank (Gruppe krempelair, 0640), kann aber
+# nichts schreiben und kommt weder an Bot-Token noch an Schlüssel
+User=krempelair-web
+Group=krempelair
+WorkingDirectory=/opt/krempelair
+Environment=PYTHONPATH=/opt/krempelair PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -m krempelair web
+Restart=always
+RestartSec=5
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictRealtime=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+TasksMax=64
+# öffentlich erreichbar: bei Speichernot zuerst beenden, nie die Regelung
+OOMScoreAdjust=1000
+
+[Install]
+WantedBy=multi-user.target

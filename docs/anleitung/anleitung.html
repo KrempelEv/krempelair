@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Lüftung Krempel – Anleitung</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm; }
+  :root { --ink: #0b0b0b; --ink2: #52514e; --muted: #898781; --line: #e1e0d9; --wash: #f3f2ee;
+    --zul: #2a78d6; --abl: #d9a300; --aul: #2f9e4a; --fol: #a0522d; --raum: #6f6e69; --crit: #d03b3b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--ink); background: #fff;
+    font: 10pt/1.42 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1 { font-size: 24pt; margin: 0 0 4pt; letter-spacing: -0.02em; }
+  h2 { font-size: 14pt; margin: 14pt 0 6pt; padding-top: 4pt; border-top: 1px solid var(--line); }
+  h2.break { border-top: 0; margin-top: 0; padding-top: 0; }
+  h3 { font-size: 11pt; margin: 12pt 0 4pt; }
+  p { margin: 0 0 6pt; }
+  .lead { font-size: 12pt; color: var(--ink2); margin-bottom: 8pt; }
+  .meta { color: var(--muted); font-size: 9pt; }
+  code, .k { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 9.5pt;
+    background: var(--wash); padding: 0 3pt; border-radius: 3pt; }
+  table { width: 100%; border-collapse: collapse; margin: 4pt 0 8pt; font-size: 9.5pt; }
+  th, td { text-align: left; vertical-align: top; padding: 3.5pt 6pt; border-bottom: 1px solid var(--line); }
+  th { color: var(--ink2); font-weight: 600; background: var(--wash); }
+  td:first-child { white-space: nowrap; }
+  .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; margin: 8pt 0 4pt; }
+  .way { border: 1px solid var(--line); border-radius: 8pt; padding: 8pt 10pt; }
+  .way h3 { margin: 0 0 3pt; }
+  .way .where { font-weight: 600; font-size: 10pt; margin: 4pt 0; word-break: break-all; }
+  .way .can { color: var(--ink2); font-size: 9.5pt; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    padding: 1pt 5pt; border-radius: 99pt; background: var(--wash); color: var(--ink2); }
+  .tag.lan { background: #e8f1fc; color: #1c5cab; }
+  .tag.web { background: #e9f6ec; color: #23753a; }
+  figure { margin: 6pt 0 10pt; }
+  figure img { width: 100%; border: 1px solid var(--line); border-radius: 6pt; display: block; }
+  figure.narrow img { width: 56%; }
+  figcaption { color: var(--muted); font-size: 9pt; margin-top: 3pt; }
+  .steps { margin: 4pt 0 8pt; padding-left: 18pt; }
+  .steps li { margin-bottom: 3pt; }
+  .note { border-left: 3pt solid var(--zul); background: #f4f8fd; padding: 6pt 10pt; margin: 8pt 0; border-radius: 0 6pt 6pt 0; }
+  .warn { border-left-color: var(--crit); background: #fdf3f3; }
+  .sw { display: inline-block; width: 18pt; height: 5pt; border-radius: 2pt; vertical-align: middle; margin-right: 5pt; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+  .tg { border: 1px solid var(--line); border-radius: 8pt; padding: 8pt 10pt; font-size: 9.5pt; background: #fbfbfa; }
+  .tg .me { text-align: right; margin: 2pt 0; }
+  .tg .me span { background: #e3f2fd; padding: 3pt 7pt; border-radius: 8pt; display: inline-block; }
+  .tg .bot span { background: #fff; border: 1px solid var(--line); padding: 4pt 7pt; border-radius: 8pt; display: inline-block; }
+  .tg .keys { display: flex; flex-wrap: wrap; gap: 3pt; margin-top: 3pt; }
+  .tg .keys span { border: 1px solid #b8d4f1; color: #1c5cab; background: #f4f9fe; border-radius: 5pt; padding: 2pt 6pt; font-size: 8.5pt; }
+  .break { break-before: page; }
+  .avoid { break-inside: avoid; }
+  footer.end { margin-top: 18pt; color: var(--muted); font-size: 9pt; border-top: 1px solid var(--line); padding-top: 6pt; }
+</style>
+</head>
+<body>
+
+<p class="meta">Krempel · Lüftungsanlage · Stand Oktober 2026</p>
+<h1>Lüftung Krempel</h1>
+<p class="lead">Anleitung für Bedienung per Telegram, Web-Panel und Dashboard</p>
+
+<h2>Drei Wege zur Anlage</h2>
+<div class="ways">
+  <div class="way">
+    <span class="tag web">überall</span>
+    <h3>Telegram-Bot</h3>
+    <p class="where">@krempelair_bot</p>
+    <p class="can">Ansehen und bedienen, vom Handy aus, auch unterwegs. Anmeldung mit Passwort.</p>
+  </div>
+  <div class="way">
+    <span class="tag web">überall</span>
+    <h3>Dashboard</h3>
+    <p class="where">https://krempel.maurizi.ch</p>
+    <p class="can">Nur ansehen: Anlagenschema, Temperaturen, Verläufe. Ohne Anmeldung.</p>
+  </div>
+  <div class="way">
+    <span class="tag lan">nur im Krempel</span>
+    <h3>Web-Panel</h3>
+    <p class="where">http://192.168.1.100:8080</p>
+    <p class="can">Ansehen und bedienen, inklusive Handbetrieb. Nur im WLAN «Krempel», Anmeldung mit Passwort.</p>
+  </div>
+</div>
+<p>Das Passwort ist für Telegram und Web-Panel dasselbe. Es steht nicht in dieser
+Anleitung; ihr bekommt es von der verantwortlichen Person.</p>
+
+<h2>Telegram-Bot</h2>
+<h3>Einmalig anmelden</h3>
+<ol class="steps">
+  <li>In Telegram nach <span class="k">@krempelair_bot</span> suchen und den Chat öffnen.</li>
+  <li><span class="k">/login Passwort</span> senden, zum Beispiel <span class="k">/login geheim123</span>.</li>
+  <li>Der Bot löscht die Nachricht mit dem Passwort und antwortet «Angemeldet». Ab jetzt kennt er diesen Chat.</li>
+</ol>
+<div class="note">Der Bot funktioniert nur im <b>privaten Chat</b>, nicht in Gruppen. Nach fünf
+falschen Passwörtern ist die Anmeldung für 15 Minuten gesperrt.</div>
+
+<div class="two">
+<div>
+<h3>Befehle</h3>
+<table>
+  <tr><th>Befehl</th><th>Wirkung</th></tr>
+  <tr><td><span class="k">/status</span></td><td>Temperaturen, Klappe und Heizventil in %, Betriebsart, Meldungen</td></tr>
+  <tr><td><span class="k">/lueftung</span></td><td>Tasten: Stufe 1, Stufe 2, Aus, Raucherraum ein/aus</td></tr>
+  <tr><td><span class="k">/temperatur</span></td><td>Solltemperatur der Zuluft, 17–26 °C</td></tr>
+  <tr><td><span class="k">/nak</span></td><td>Nachtauskühlung für 48 h aktivieren oder beenden, Ziel 18–23 °C</td></tr>
+  <tr><td><span class="k">/login</span> · <span class="k">/logout</span></td><td>Chat an- bzw. abmelden; <span class="k">/hilfe</span> zeigt alle Befehle</td></tr>
+</table>
+</div>
+<div>
+<h3>So sieht es aus</h3>
+<div class="tg">
+  <p class="me"><span>/lueftung</span></p>
+  <p class="bot"><span>Lüftung schalten (jetzt: aus, Raucherraum aus):</span></p>
+  <div class="keys"><span>Stufe 1</span><span>Stufe 2</span><span>Aus</span></div>
+  <div class="keys"><span>Raucherraum ein</span><span>Raucherraum aus</span></div>
+  <p class="bot" style="margin-top:6pt"><span>✅ Lüftung Stufe 1</span></p>
+</div>
+<p class="meta" style="margin-top:6pt">Der Bot meldet ✅ erst, wenn die Anlage tatsächlich
+umgeschaltet hat. ❌ heisst: nicht ausgeführt, der Grund steht dabei.</p>
+</div>
+</div>
+
+<h2 class="break">Dashboard: Anlage ansehen</h2>
+<p><b>https://krempel.maurizi.ch</b> von überall, im Krempel auch <b>http://192.168.1.100</b>.
+Ohne Anmeldung, nur zum Ansehen.</p>
+<figure>
+  <img src="schema.png" alt="Anlagenschema mit Temperaturen, Klappe, Heizregister und Ventilatoren">
+  <figcaption>Anlagenschema: links Aussen- und Fortluft, rechts der Raum. Die Werte aktualisieren sich alle paar Sekunden.</figcaption>
+</figure>
+
+<div class="two avoid">
+<div>
+<h3>Was das Schema zeigt</h3>
+<table>
+  <tr><th>Farbe</th><th>Luft</th></tr>
+  <tr><td><span class="sw" style="background:var(--aul)"></span>grün</td><td>Aussenluft (angesaugt)</td></tr>
+  <tr><td><span class="sw" style="background:var(--zul)"></span>blau</td><td>Zuluft (in den Raum)</td></tr>
+  <tr><td><span class="sw" style="background:var(--abl)"></span>gelb</td><td>Abluft (aus dem Raum)</td></tr>
+  <tr><td><span class="sw" style="background:var(--fol)"></span>braun</td><td>Fortluft (nach draussen)</td></tr>
+  <tr><td colspan="2" class="meta">Kennfarben nach DIN EN 16798-3</td></tr>
+</table>
+</div>
+<div>
+<h3>Lesehilfe</h3>
+<ul class="steps">
+  <li><b>WRG-Klappe</b>: 100 % = alle Luft über den Wärmetauscher, 0 % = alles über den Bypass. Der Luftstrom im Schema ist entsprechend dick.</li>
+  <li><b>Heizventil</b>: wie weit das Heizregister heizt.</li>
+  <li>Drehende Ventilatoren = Lüftung läuft.</li>
+  <li><b>HAND</b> in Rot = dieses Teil steht gerade auf Handbetrieb.</li>
+  <li>Roter Kasten = Störung (Frost, Strömungswächter).</li>
+</ul>
+</div>
+</div>
+
+<div class="two avoid">
+<div>
+<h3>Verläufe</h3>
+<p>Jeder Fühler, die Klappe, das Ventil, die Pumpe und die Ventilatoren sind <b>anklickbar</b>:
+es öffnet sich der Verlauf dazu. Oben wählt ihr den Zeitraum (6 h bis «Alles»), unten mit dem
+kleinen Navigator verschiebt ihr ihn. Mit <b>«+ Kurve hinzufügen»</b> lassen sich bis zu
+sechs weitere Kurven dazuladen.</p>
+</div>
+<figure style="margin-top:12pt">
+  <img src="detail.png" alt="Detailansicht Zulufttemperatur mit Sollwert">
+  <figcaption>Klick auf den Zuluft-Fühler: Verlauf von Zuluft und Sollwert.</figcaption>
+</figure>
+</div>
+
+<h2 class="break">Web-Panel: bedienen im Krempel</h2>
+<p>Nur aus dem WLAN <b>«Krempel»</b> erreichbar, nicht über krempel.maurizi.ch.</p>
+<ol class="steps">
+  <li>Im Krempel-WLAN im Browser <b>http://192.168.1.100:8080</b> öffnen.</li>
+  <li>Oben rechts auf <b>Anmelden</b> tippen, das Telegram-Passwort eingeben.</li>
+  <li>Unter dem Schema erscheint die Karte <b>Bedienung</b>. Nach 8 Stunden oder mit <b>Abmelden</b> ist die Sitzung vorbei.</li>
+</ol>
+<figure>
+  <img src="bedienung.png" alt="Bedienkarte mit Lüftung, Raucherraum, Solltemperatur, Nachtauskühlung und Handbetrieb">
+  <figcaption>Bedienung im Web-Panel. Das Ergebnis jeder Aktion steht oben rechts in der Karte.</figcaption>
+</figure>
+
+<table class="avoid">
+  <tr><th>Bereich</th><th>So geht's</th></tr>
+  <tr><td>Lüftung</td><td>Aus, Stufe 1 oder Stufe 2 antippen.</td></tr>
+  <tr><td>Raucherraum</td><td>Ein oder Aus.</td></tr>
+  <tr><td>Solltemperatur</td><td>Temperatur wählen, «Setzen». Gilt für die Zuluft.</td></tr>
+  <tr><td>Nachtauskühlung</td><td>«48 h aktivieren» oder «Beenden»; Ziel innen wählen, «Setzen».</td></tr>
+  <tr><td>Handbetrieb</td><td>WRG-Klappe und/oder Heizventil ankreuzen, Wert mit dem Regler wählen, Dauer 1–8 h, «Hand setzen». Danach geht es von selbst zurück auf Automatik; «Automatik» beendet sofort.</td></tr>
+</table>
+<div class="note warn">Handbetrieb übersteuert die Regelung. Nur einsetzen, wenn ihr wisst wozu,
+und lieber kurz. Frostschutz hat trotzdem immer Vorrang.</div>
+
+<h2 class="break">Was die Anlage selbst macht</h2>
+<table class="avoid">
+  <tr><th>Automatik</th><th>Was passiert</th></tr>
+  <tr><td>Zuluft-Regelung</td><td>Hält die Zuluft auf der Solltemperatur: zuerst über den Wärmetauscher, erst dann mit dem Heizregister.</td></tr>
+  <tr><td>Kälterückgewinnung</td><td>Ist es draussen wärmer als drinnen, hält der Tauscher die kühle Innenluft im Haus. Kein Schalter nötig.</td></tr>
+  <tr><td>Nachtauskühlung</td><td>Nur wenn aktiviert (48 h): Ist es drinnen über dem Ziel und draussen deutlich kühler (mind. 3 K, über 10 °C), schaltet sie die Lüftung selbst auf Stufe 2, öffnet den Bypass und schliesst das Heizventil. Danach stellt sie die Lüftung zurück.</td></tr>
+  <tr><td>Laufzeitbegrenzung</td><td>Läuft die Lüftung <b>36 Stunden ohne Unterbruch</b>, schaltet sie sich aus. Bot und Panel zeigen vorher «schaltet spätestens … aus».</td></tr>
+  <tr><td>Frostschutz</td><td>Meldet der Frostwächter, gehen Klappe und Heizventil in die Frostschutz-Stellung, egal was eingestellt ist.</td></tr>
+</table>
+
+<h2>Wenn etwas nicht geht</h2>
+<table class="avoid">
+  <tr><th>Problem</th><th>Was tun</th></tr>
+  <tr><td>krempel.maurizi.ch: «nicht erreichbar»</td><td>Keine Verbindung zum Krempel (Internet oder Strom weg). Die Anlage regelt trotzdem weiter. Bei Dauer der verantwortlichen Person melden.</td></tr>
+  <tr><td>Bot antwortet nicht</td><td>Meist Internet im Krempel weg. Befehle, die während eines Ausfalls geschickt wurden, verwirft der Bot bewusst; danach nochmals senden.</td></tr>
+  <tr><td>«Bitte zuerst anmelden»</td><td><span class="k">/login Passwort</span> im privaten Chat mit dem Bot.</td></tr>
+  <tr><td>Panel lädt nicht</td><td>Seid ihr im WLAN «Krempel»? Adresse genau so: <b>http://192.168.1.100:8080</b> (mit :8080, ohne https).</td></tr>
+  <tr><td>Meldung «Sammelalarm» oder «Strömungswächter»</td><td>Kommen an dieser Anlage immer wieder vor und halten sie nicht auf. Nur Frost stoppt.</td></tr>
+  <tr><td>Lüftung plötzlich aus</td><td>Laufzeitbegrenzung nach 36 h. Bei Bedarf einfach wieder einschalten.</td></tr>
+</table>
+
+<footer class="end">Ansprechperson für die Anlage: ______________________ &nbsp;·&nbsp; Technische Doku: Projekt «krempelair» (README, docs/).</footer>
+</body>
+</html>

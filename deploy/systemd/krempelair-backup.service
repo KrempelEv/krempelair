@@ -1,0 +1,11 @@
+[Unit]
+Description=Krempelair Sicherung (Konfiguration, Schlüssel, Datenbank) nach maurizi.ch
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /opt/krempelair/deploy/backup.sh
+UMask=0077
+Nice=10
+IOSchedulingClass=idle

@@ -1,0 +1,27 @@
+[Unit]
+Description=Krempelair Telegram-Bot
+Wants=network-online.target
+After=network-online.target krempelair-control.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=krempelair
+Group=krempelair
+WorkingDirectory=/opt/krempelair
+Environment=PYTHONPATH=/opt/krempelair PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+EnvironmentFile=/etc/krempelair/secrets.env
+ExecStart=/usr/bin/python3 -m krempelair bot
+Restart=always
+RestartSec=10
+StateDirectory=krempelair
+StateDirectoryMode=0750
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/krempelair
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

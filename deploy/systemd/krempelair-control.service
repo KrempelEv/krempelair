@@ -1,0 +1,37 @@
+[Unit]
+Description=Krempelair Regelung (einziger Zugriff auf die I2C-Karten)
+After=local-fs.target time-sync.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=notify
+NotifyAccess=main
+User=krempelair
+Group=krempelair
+SupplementaryGroups=i2c
+WorkingDirectory=/opt/krempelair
+Environment=PYTHONPATH=/opt/krempelair PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -m krempelair control
+Restart=always
+RestartSec=5
+# hängt der Regeltakt (z. B. blockierter I2C-Bus), startet systemd den Dienst neu
+WatchdogSec=30
+TimeoutStopSec=15
+StateDirectory=krempelair
+StateDirectoryMode=0750
+RuntimeDirectory=krempelair
+RuntimeDirectoryMode=0755
+RuntimeDirectoryPreserve=yes
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/krempelair /run/krempelair
+# Datenbank 0640: das Dashboard (Gruppe krempelair) liest, schreibt aber nicht
+UMask=0027
+Nice=-5
+# bei Speichernot zuletzt beenden
+OOMScoreAdjust=-900
+
+[Install]
+WantedBy=multi-user.target

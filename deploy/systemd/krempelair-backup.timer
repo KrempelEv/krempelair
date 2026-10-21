@@ -1,0 +1,10 @@
+[Unit]
+Description=Krempelair Sicherung täglich
+
+[Timer]
+OnCalendar=*-*-* 03:30
+RandomizedDelaySec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

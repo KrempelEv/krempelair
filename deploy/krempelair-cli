@@ -1,0 +1,7 @@
+#!/bin/sh
+# krempelair status | check-hardware | identify …
+# Befehle, die in die Datenbank schreiben (steptest, migrate-legacy), als
+# Dienstbenutzer ausführen: sudo -u krempelair krempelair steptest …
+# -I: das aktuelle Verzeichnis kommt nicht in den Importpfad (sudo aus einem
+# fremd beschreibbaren Ordner darf keinen Code unterschieben)
+exec python3 -I -c 'import sys; sys.path.insert(0, "/opt/krempelair"); from krempelair.__main__ import main; sys.exit(main(["--config", "/etc/krempelair/config.ini"] + sys.argv[1:]))' "$@"

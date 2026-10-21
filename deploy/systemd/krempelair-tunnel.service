@@ -1,0 +1,33 @@
+[Unit]
+Description=Krempelair Fernzugang (Reverse-SSH zu maurizi.ch: SSH und Dashboard)
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+ConditionPathExists=/var/lib/krempelair-tunnel/.ssh/tunnel
+
+[Service]
+Type=simple
+User=krempelair-tunnel
+Group=krempelair-tunnel
+EnvironmentFile=/etc/krempelair/tunnel.env
+ExecStart=/usr/bin/ssh -NT \
+    -o BatchMode=yes \
+    -o ExitOnForwardFailure=yes \
+    -o ServerAliveInterval=30 \
+    -o ServerAliveCountMax=3 \
+    -o StrictHostKeyChecking=yes \
+    -o CheckHostIP=no \
+    -o UserKnownHostsFile=/var/lib/krempelair-tunnel/.ssh/known_hosts \
+    -i /var/lib/krempelair-tunnel/.ssh/tunnel \
+    -R 127.0.0.1:${TUNNEL_SSH_PORT}:127.0.0.1:22 \
+    -R 127.0.0.1:${TUNNEL_WEB_PORT}:127.0.0.1:80 \
+    ${TUNNEL_USER}@${TUNNEL_HOST}
+Restart=always
+RestartSec=15
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

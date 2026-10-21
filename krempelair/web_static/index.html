@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lüftung Krempel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232a78d6'/%3E%3Cpath d='M16 16 L16 5 A11 11 0 0 1 25.5 10.5 Z M16 16 L25.5 21.5 A11 11 0 0 1 6.5 21.5 Z M16 16 L6.5 10.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Lüftung Krempel</h1>
+    <span class="sub">Anlagenschema und Verlauf</span>
+  </div>
+  <div class="top-right">
+    <button type="button" class="btn" id="auth-btn" hidden>Anmelden</button>
+    <div class="conn" id="conn" role="status" aria-live="polite">
+      <span class="dot"></span><span class="txt">Verbinde …</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="card scheme-card" aria-labelledby="scheme-title">
+    <div class="card-head">
+      <h2 id="scheme-title">Anlage</h2>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="scheme-wrap">
+      <svg id="scheme" viewBox="0 0 1000 480" role="img" aria-labelledby="scheme-desc">
+        <desc id="scheme-desc">Schema der Lüftungsanlage mit Wärmetauscher, Bypassklappe, Heizregister, Ventilatoren und Temperaturfühlern. Alle Werte stehen zusätzlich in der Tabelle Messwerte.</desc>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="context-stroke"/>
+          </marker>
+          <!-- Laufrad: vier breite, gekrümmte Schaufeln um die Nabe, Mittelpunkt (0,0).
+               Farbe kommt über currentColor von .rotor (CSS erreicht <use>-Kopien nicht direkt). -->
+          <path id="fan-blade" d="M0 -5 C 6 -5.5 12.5 -9.5 15 -16.5 C 11 -21.5 4 -21.5 -1 -19 C 1.2 -14 1.2 -9 0 -5 Z"/>
+          <g id="fan-rotor">
+            <use href="#fan-blade"/>
+            <use href="#fan-blade" transform="rotate(90)"/>
+            <use href="#fan-blade" transform="rotate(180)"/>
+            <use href="#fan-blade" transform="rotate(270)"/>
+            <circle r="5.5" style="fill: var(--surface); stroke: currentColor; stroke-width: 1.5"/>
+            <circle r="2"/>
+          </g>
+        </defs>
+
+        <!-- Raum -->
+        <g class="room">
+          <rect x="890" y="62" width="96" height="316" rx="10"/>
+          <text x="938" y="88" class="lbl c">Raum</text>
+        </g>
+
+        <!-- Luftwege -->
+        <g class="ducts">
+          <!-- Aussenluft teilt sich bei x=290: Tauscher (through) und Bypass,
+               nach dem Tauscher bei x=640 wieder vereint -->
+          <path class="duct aul" d="M30 110 H290"/>
+          <path class="duct aul through" d="M290 110 H360 L422.5 172.5"/>
+          <path class="duct abl" d="M890 110 H580 L517.5 172.5"/>
+          <path class="duct zul through" d="M517.5 267.5 L580 330 H640"/>
+          <path class="duct zul" d="M640 330 H890"/>
+          <path class="duct fol" d="M422.5 267.5 L360 330 H30"/>
+          <path class="duct aul bypass" d="M290 110 V318 A12 12 0 0 1 290 342 V400 H640 V330"/>
+        </g>
+        <g class="flows">
+          <path class="flow aul" d="M30 110 H290"/>
+          <path class="flow aul through" d="M290 110 H360 L422.5 172.5"/>
+          <path class="flow abl" d="M890 110 H580 L517.5 172.5"/>
+          <path class="flow zul through" d="M517.5 267.5 L580 330 H640"/>
+          <path class="flow zul" d="M640 330 H890"/>
+          <path class="flow fol" d="M422.5 267.5 L360 330 H30"/>
+          <path class="flow aul bypass" d="M290 110 V318 A12 12 0 0 1 290 342 V400 H640 V330"/>
+        </g>
+        <g class="ends">
+          <line class="end aul" x1="62" y1="110" x2="30" y2="110" marker-end="url(#arrow)" transform="rotate(180 46 110)"/>
+          <line class="end abl" x1="880" y1="110" x2="860" y2="110" marker-end="url(#arrow)"/>
+          <line class="end zul" x1="860" y1="330" x2="880" y2="330" marker-end="url(#arrow)"/>
+          <line class="end fol" x1="50" y1="330" x2="30" y2="330" marker-end="url(#arrow)"/>
+        </g>
+        <text x="34" y="96" class="lbl stream">Aussenluft</text>
+        <text x="34" y="316" class="lbl stream">Fortluft</text>
+        <text x="886" y="96" class="lbl stream end">Abluft</text>
+        <text x="886" y="316" class="lbl stream end">Zuluft</text>
+
+        <!-- Kreuz-Wärmetauscher -->
+        <g class="hx hit" id="hx" data-signals="wrg,t_aul,t_abl,t_zul,t_fol" data-title="Wärmerückgewinnung (Kreuz-Wärmetauscher)">
+          <path class="hx-body" d="M470 125 L565 220 L470 315 L375 220 Z"/>
+          <path class="hx-plates" d="M422.5 172.5 L517.5 267.5 M517.5 172.5 L422.5 267.5 M446 149 L541 244 M494 149 L399 244 M399 196 L494 291 M541 196 L446 291"/>
+          <text x="470" y="345" class="lbl c">WRG</text>
+        </g>
+
+        <!-- Bypassklappe -->
+        <g class="damper hit" id="damper" transform="translate(290 230)" data-signals="wrg" data-title="WRG-Bypassklappe">
+          <circle r="3.5" class="hub"/>
+          <line class="blade" x1="-17" y1="0" x2="17" y2="0"/>
+        </g>
+        <g class="act hit" transform="translate(240 230)" data-signals="wrg" data-title="Klappenantrieb WRG">
+          <rect x="-14" y="-14" width="28" height="28" rx="4" class="motor"/>
+          <text y="5" class="sym c">M</text>
+          <line x1="14" y1="0" x2="36" y2="0" class="link"/>
+        </g>
+        <g class="value-tag hit" id="tag-wrg" transform="translate(150 190)" data-signals="wrg" data-title="WRG-Bypassklappe">
+          <text class="k">WRG-Klappe</text>
+          <text x="88" class="hand-badge" id="hand-wrg">HAND</text>
+          <text y="22" class="v" data-v="wrg">–</text>
+          <text y="40" class="s" data-v="bypass">–</text>
+        </g>
+
+        <!-- Heizregister mit Ventil und Pumpe -->
+        <g class="coil hit" id="coil" data-signals="le,pump,t_zul" data-title="Heizregister">
+          <rect x="660" y="296" width="36" height="68" rx="3" class="coil-body"/>
+          <line x1="660" y1="364" x2="696" y2="296" class="coil-diag"/>
+          <text x="669" y="318" class="sym">+</text>
+          <text x="684" y="356" class="sym">−</text>
+        </g>
+        <g class="water">
+          <path class="hot" d="M666 364 V452"/>
+          <path class="cold" d="M690 364 V452"/>
+        </g>
+        <g class="pump hit" id="pump" transform="translate(666 398)" data-signals="pump,le" data-title="Pumpe Heizregister">
+          <circle r="13" class="pump-body"/>
+          <path d="M-7 6 L0 -8 L7 6 Z" class="pump-tri"/>
+        </g>
+        <g class="valve hit" transform="translate(666 436)" data-signals="le" data-title="Heizventil mit Antrieb">
+          <path d="M-10 -8 L10 8 L10 -8 L-10 8 Z" class="valve-body"/>
+          <line x1="-10" y1="0" x2="-26" y2="0" class="link"/>
+          <rect x="-44" y="-9" width="18" height="18" rx="3" class="motor"/>
+          <text x="-35" y="4" class="sym c small">M</text>
+        </g>
+        <g class="value-tag right hit" transform="translate(712 418)" data-signals="le" data-title="Heizventil">
+          <text class="k">Heizventil</text>
+          <text x="72" class="hand-badge" id="hand-le">HAND</text>
+          <text y="22" class="v" data-v="le">–</text>
+        </g>
+
+        <!-- Frostschutz nach dem Heizregister -->
+        <g class="frost hit" id="frost" transform="translate(726 330)" data-signals="frost,t_zul" data-title="Frostschutzthermostat">
+          <line x1="0" y1="0" x2="0" y2="-28" class="stem"/>
+          <rect x="-11" y="-50" width="22" height="22" rx="4" class="frost-box"/>
+          <text y="-34" class="sym c small">F</text>
+        </g>
+
+        <!-- Ventilatoren -->
+        <g class="fan" id="fan-zul" transform="translate(790 330)">
+          <g class="hit" data-signals="fan_zul,fan_level" data-title="Zuluftventilator"><circle r="27" class="fan-body"/>
+          <g class="rotor"><use href="#fan-rotor"/></g>
+          <text y="-38" class="lbl c" data-v="fan-zul">–</text></g>
+          <g class="flowsw hit" transform="translate(32 22)" data-signals="stroem_zul,fan_zul" data-title="Strömungswächter Zuluft"><circle r="7" class="sw"/><text y="3.5" class="sym c tiny">S</text></g>
+        </g>
+        <g class="fan" id="fan-fol" transform="translate(200 330)">
+          <g class="hit" data-signals="fan_fol,fan_level" data-title="Abluftventilator"><circle r="27" class="fan-body"/>
+          <g class="rotor"><use href="#fan-rotor"/></g>
+          <text y="-38" class="lbl c" data-v="fan-fol">–</text></g>
+          <g class="flowsw hit" transform="translate(32 22)" data-signals="stroem_fol,fan_fol" data-title="Strömungswächter Fortluft"><circle r="7" class="sw"/><text y="3.5" class="sym c tiny">S</text></g>
+        </g>
+
+        <!-- Fühler -->
+        <g class="sensor hit" data-key="t_aul" transform="translate(130 110)" data-signals="t_aul" data-title="Aussenluft-Temperatur">
+          <line y1="0" y2="-24" class="stem"/><circle cy="-36" r="12" class="probe"/><text y="-32" class="sym c small">T</text>
+          <text x="18" y="-32" class="reading" data-t="t_aul">–</text>
+        </g>
+        <g class="sensor hit" data-key="t_fol" transform="translate(110 330)" data-signals="t_fol" data-title="Fortluft-Temperatur">
+          <line y1="0" y2="24" class="stem"/><circle cy="36" r="12" class="probe"/><text y="40" class="sym c small">T</text>
+          <text y="72" class="reading c" data-t="t_fol">–</text>
+        </g>
+        <g class="sensor hit" data-key="t_abl" transform="translate(690 110)" data-signals="t_abl" data-title="Abluft-Temperatur">
+          <line y1="0" y2="-24" class="stem"/><circle cy="-36" r="12" class="probe"/><text y="-32" class="sym c small">T</text>
+          <text x="18" y="-32" class="reading" data-t="t_abl">–</text>
+        </g>
+        <g class="sensor hit" data-key="t_zul" transform="translate(852 330)" data-signals="t_zul,t_soll" data-title="Zuluft-Temperatur">
+          <line y1="0" y2="24" class="stem"/><circle cy="36" r="12" class="probe"/><text y="40" class="sym c small">T</text>
+          <text y="72" class="reading c" data-t="t_zul">–</text>
+          <text y="90" class="reading-sub c" data-v="soll">–</text>
+        </g>
+        <g class="sensor hit" data-key="t_raum" transform="translate(938 200)" data-signals="t_raum" data-title="Raumtemperatur vorne">
+          <circle r="12" class="probe"/><text y="4" class="sym c small">T</text>
+          <text y="34" class="reading c" data-t="t_raum">–</text>
+          <text y="52" class="reading-sub c">vorne</text>
+        </g>
+        <g class="sensor hit" data-key="t_witt" transform="translate(300 34)" data-signals="t_witt" data-title="Witterungsfühler">
+          <circle r="12" class="probe"/><text y="4" class="sym c small">T</text>
+          <text x="18" y="5" class="reading" data-t="t_witt">–</text>
+          <text x="18" y="22" class="reading-sub">Witterung</text>
+        </g>
+        <g class="smoker hit" id="smoker" transform="translate(938 300)" data-signals="smoker" data-title="Raucherraum">
+          <rect x="-44" y="-14" width="88" height="28" rx="14" class="pill"/>
+          <text y="5" class="sym c small" data-v="smoker">Raucher</text>
+        </g>
+
+        <!-- Betriebszustand -->
+        <g class="status-block" transform="translate(600 168)">
+          <g class="hit" data-signals="running,wrg,le" data-title="Betriebsart"><text class="k">Betriebsart</text><text x="128" class="v2" data-v="mode">–</text></g>
+          <g class="hit" data-signals="fan_level,fan_zul,fan_fol" data-title="Lüftung"><text y="24" class="k">Lüftung</text><text x="128" y="24" class="v2" data-v="level">–</text></g>
+          <g class="hit" data-signals="nak_active,t_raum,t_witt,nak_target" data-title="Nachtauskühlung"><text y="48" class="k">Nachtauskühlung</text><text x="128" y="48" class="v2" data-v="nak">–</text></g>
+          <g class="hit" data-signals="alarm,frost,stroem_zul,stroem_fol" data-title="Störungen"><text y="72" class="k">Störungen</text><text x="128" y="72" class="v2" data-v="faults">–</text></g>
+          <g class="hit" data-signals="fan_level,fan_zul,fan_fol" data-title="Restlaufzeit"><text y="96" class="k">Restlaufzeit</text><text x="128" y="96" class="v2" data-v="remaining">–</text></g>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="card control" id="control-card" aria-labelledby="control-title" hidden>
+    <div class="card-head">
+      <h2 id="control-title">Bedienung</h2>
+      <span class="hint" id="control-msg" role="status" aria-live="polite"></span>
+    </div>
+    <div class="control-grid">
+      <div class="ctl">
+        <h3>Lüftung</h3>
+        <div class="seg" id="ctl-fan">
+          <button type="button" data-level="0">Aus</button>
+          <button type="button" data-level="1">Stufe 1</button>
+          <button type="button" data-level="2">Stufe 2</button>
+        </div>
+        <p class="sub2" id="ctl-runtime"></p>
+      </div>
+      <div class="ctl">
+        <h3>Raucherraum</h3>
+        <div class="seg" id="ctl-smoker">
+          <button type="button" data-on="0">Aus</button>
+          <button type="button" data-on="1">Ein</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <h3>Solltemperatur Zuluft</h3>
+        <div class="row">
+          <select id="ctl-setpoint" aria-label="Solltemperatur Zuluft"></select>
+          <button type="button" class="btn" id="ctl-setpoint-set">Setzen</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <h3>Nachtauskühlung</h3>
+        <div class="row">
+          <button type="button" class="btn" id="ctl-nak-on">48 h aktivieren</button>
+          <button type="button" class="btn ghost" id="ctl-nak-off">Beenden</button>
+        </div>
+        <div class="row">
+          <label for="ctl-nak-target">Ziel innen</label>
+          <select id="ctl-nak-target"></select>
+          <button type="button" class="btn ghost" id="ctl-nak-target-set">Setzen</button>
+        </div>
+        <p class="sub2" id="ctl-nak-state"></p>
+      </div>
+      <div class="ctl wide">
+        <h3>Handbetrieb</h3>
+        <div class="manual">
+          <label class="chk"><input type="checkbox" id="man-wrg-on"> WRG-Klappe</label>
+          <input type="range" id="man-wrg" min="0" max="100" step="5" value="100" aria-label="WRG-Klappe in Prozent">
+          <output id="man-wrg-out">100 %</output>
+          <label class="chk"><input type="checkbox" id="man-le-on"> Heizventil</label>
+          <input type="range" id="man-le" min="0" max="100" step="5" value="0" aria-label="Heizventil in Prozent">
+          <output id="man-le-out">0 %</output>
+        </div>
+        <div class="row">
+          <label for="man-hours">Dauer</label>
+          <select id="man-hours"></select>
+          <button type="button" class="btn" id="man-set">Hand setzen</button>
+          <button type="button" class="btn ghost" id="man-auto">Automatik</button>
+        </div>
+        <p class="sub2" id="man-state"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="hist-title">
+    <div class="card-head">
+      <h2 id="hist-title">Verlauf</h2>
+      <span class="hint">Im Schema auf einen Fühler, eine Klappe oder einen Antrieb klicken für dessen Verlauf.</span>
+    </div>
+    <div class="panel" id="panel-temp"></div>
+    <div class="panel" id="panel-out"></div>
+    <div class="panel" id="panel-state"></div>
+  </section>
+
+  <div class="two">
+    <section class="card" aria-labelledby="values-title">
+      <div class="card-head"><h2 id="values-title">Messwerte</h2></div>
+      <table class="values" id="values"><tbody></tbody></table>
+    </section>
+    <section class="card" aria-labelledby="events-title">
+      <div class="card-head"><h2 id="events-title">Ereignisse</h2></div>
+      <ol class="events" id="events"></ol>
+    </section>
+  </div>
+</main>
+<footer class="foot"><span id="foot">–</span></footer>
+<dialog id="login" aria-labelledby="login-title">
+  <form method="dialog" id="login-form">
+    <h2 id="login-title">Anmelden</h2>
+    <p class="hint">Gleiches Passwort wie im Telegram-Bot. Nur im LAN möglich.</p>
+    <input type="password" id="login-pw" autocomplete="current-password" aria-label="Passwort" required>
+    <p class="hint" id="login-msg" role="alert"></p>
+    <div class="row">
+      <button type="submit" class="btn" id="login-go">Anmelden</button>
+      <button type="button" class="btn ghost" id="login-cancel">Abbrechen</button>
+    </div>
+  </form>
+</dialog>
+<dialog id="detail" aria-labelledby="detail-title">
+  <div class="dlg-head">
+    <h2 id="detail-title">–</h2>
+    <button type="button" class="close" id="detail-close" aria-label="Schliessen">×</button>
+  </div>
+  <div class="panel" id="detail-panel"></div>
+</dialog>
+<script src="/static/vendor/highstock.js"></script>
+<script src="/static/vendor/accessibility.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
