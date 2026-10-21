@@ -127,8 +127,34 @@ class RegulatorTest(unittest.TestCase):
         d = self.reg.decide(0, temps(), 20, 2, True, False, True)
         self.assertEqual((d.mode, d.wrg, d.le), (MODE_NAK, 0, 0))
 
-    def test_off_state_like_legacy(self):
-        d = self.reg.decide(0, temps(), 20, 0, False, False, False)
+    def off_le(self, witt, aul=10.0, faulty=()):
+        t = temps(witt=witt, aul=aul)
+        for k in faulty:
+            t[k] = None
+        d = self.reg.decide(0, t, 20, 0, False, False, False, faulty=faulty)
+        self.assertEqual((d.mode, d.wrg), (MODE_AUS, 1023))
+        return d.le
+
+    def test_off_valve_closed_when_warm_open_when_cold(self):
+        self.assertEqual(self.off_le(12), 0)
+        self.assertEqual(self.off_le(2), 900)
+
+    def test_off_valve_hysteresis(self):
+        self.assertEqual(self.off_le(4), 900)   # Start zwischen den Schwellen: sicher offen
+        self.assertEqual(self.off_le(5.5), 0)
+        self.assertEqual(self.off_le(4), 0)
+        self.assertEqual(self.off_le(2.9), 900)
+        self.assertEqual(self.off_le(4.9), 900)
+
+    def test_off_valve_opens_on_weather_sensor_fault(self):
+        self.assertEqual(self.off_le(12), 0)
+        self.assertEqual(self.off_le(12, aul=12, faulty=("t_witt",)), 900)
+        self.assertEqual(self.off_le(12), 0)
+
+    def test_off_valve_like_legacy(self):
+        cfg = ControlConfig()
+        cfg.off_le = 900
+        d = Regulator(cfg).decide(0, temps(witt=15), 20, 0, False, False, False)
         self.assertEqual((d.mode, d.wrg, d.le), (MODE_AUS, 1023, 900))
 
     def test_modes_in_operation(self):

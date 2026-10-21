@@ -58,7 +58,13 @@ class ControlConfig:
     legacy_cycle_seconds: float = 10.0
     # Stellwerte 0…1023 je Zustand
     off_wrg: int = 1023
-    off_le: int = 900
+    # Heizventil bei stehender Anlage: zu; ist es draussen kalt (Witterung
+    # unter off_cold_on °C bis über off_cold_off °C, Fühlerausfall) offen
+    # gegen Frost im stehenden Register. off_le = 900 verhält sich wie das Altsystem.
+    off_le: int = 0
+    off_le_cold: int = 900
+    off_cold_on: float = 3.0
+    off_cold_off: float = 5.0
     frost_wrg: int = 1023
     frost_le: int = 900
     safe_wrg: int = 1023
@@ -174,6 +180,10 @@ VALIDATORS = {
     ("panel", "port"): lambda v: 0 < v < 65536,
     ("panel", "session_hours"): lambda v: 0 < v <= 24,
     ("control", "max_run_hours"): lambda v: v >= 0,
+    ("control", "off_le"): lambda v: 0 <= v <= 1023,
+    ("control", "off_le_cold"): lambda v: 0 <= v <= 1023,
+    ("control", "off_cold_on"): lambda v: -20 <= v <= 20,
+    ("control", "off_cold_off"): lambda v: -20 <= v <= 25,
     ("general", "history_seconds"): lambda v: 10 <= v <= 3600,
     ("general", "retention_days"): lambda v: v >= 7,
     ("control", "sensor_fail_cycles"): lambda v: v >= 1,

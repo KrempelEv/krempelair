@@ -357,6 +357,20 @@ class Regulator:
         self._last_legacy_time: Optional[float] = None
         self._legacy_out: Tuple[str, int, int, float] = (MODE_HEIZEN, 0, 0, 0.0)
         self._out: Tuple[Optional[int], Optional[int]] = (None, None)
+        # Stillstand: Ventil offen gegen Frost; bis zur ersten Messung über
+        # off_cold_off gilt «kalt», das ist die sichere Seite
+        self._off_cold = True
+
+    def _off_le(self, temps: Dict[str, float], faulty) -> int:
+        cfg = self.cfg
+        # nur der Witterungsfühler: die Aussenluft im stehenden Gerät zeigt
+        # ein paar Kelvin zu warm; fällt er aus, bleibt das Ventil offen
+        outside = None if "t_witt" in faulty else temps.get("t_witt")
+        if outside is None or outside < cfg.off_cold_on:
+            self._off_cold = True
+        elif outside > cfg.off_cold_off:
+            self._off_cold = False
+        return cfg.off_le_cold if self._off_cold else cfg.off_le
 
     def decide(self, now_mono: float, temps: Dict[str, float], setpoint: float,
                fan_level: int, running: bool, frost: bool, nak_active: bool,
@@ -371,7 +385,7 @@ class Regulator:
             # kühle Aussenluft direkt durch den Bypass, Heizventil zu
             decision = Decision(MODE_NAK, 0, 0)
         elif not running:
-            decision = Decision(MODE_AUS, cfg.off_wrg, cfg.off_le)
+            decision = Decision(MODE_AUS, cfg.off_wrg, self._off_le(temps, faulty))
         elif any(k in faulty for k in needed):
             # mit einem defekten Fühler würde der Regler auf Unsinn regeln
             decision = Decision(MODE_SENSORFEHLER, cfg.safe_wrg, cfg.safe_le)

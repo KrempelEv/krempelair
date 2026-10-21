@@ -56,7 +56,7 @@ class ControllerTest(unittest.TestCase):
         self.rig.run(5)
         ts, state = self.rig.state_file.read()
         self.assertTrue(state["ok"])
-        self.assertEqual((self.rig.sim.wrg, self.rig.sim.le), (1023, 900))  # Anlage aus
+        self.assertEqual((self.rig.sim.wrg, self.rig.sim.le), (1023, 0))  # Anlage aus, draussen warm
 
     def test_database_failure_does_not_stop_control(self):
         self.rig.run(5)
@@ -117,7 +117,7 @@ class ControllerTest(unittest.TestCase):
         self.rig.run(5)
         self.assertEqual((self.rig.sim.wrg, self.rig.sim.le), (100, 200))
         self.rig.run(70)
-        self.assertEqual((self.rig.sim.wrg, self.rig.sim.le), (1023, 900))
+        self.assertEqual((self.rig.sim.wrg, self.rig.sim.le), (1023, 0))  # wieder «aus»
 
 
 class ClosedLoopTest(unittest.TestCase):

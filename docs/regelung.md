@@ -25,12 +25,20 @@ Die Regelung entscheidet alle 2 s in dieser Reihenfolge:
 | Frostschutz | Frostmeldung (0x22 Bit 2) | 1023 | 900 |
 | Handbetrieb | Sprungversuch läuft (höchstens 60 min) | vorgegeben | vorgegeben |
 | Nachtauskühlung | NAK aktiviert und Bedingungen erfüllt | 0 (Bypass) | 0 |
-| Anlage aus | keine Betriebsmeldung Zuluft Stufe 1/2 | 1023 | 900 |
+| Anlage aus | keine Betriebsmeldung Zuluft Stufe 1/2 | 1023 | 0, bei Kälte 900 |
 | Sicherheitsstellung | 5 Zyklen (10 s) keine Messwerte | 1023 | 900 |
 | Normalbetrieb | sonst | PID, siehe unten | PID |
 
-Die Werte für «aus» und «Frost» sind die des Altsystems und stehen in
-`/etc/krempelair/config.ini`.
+Die Werte für «Frost» und die Sicherheitsstellung sind die des Altsystems
+und stehen in `/etc/krempelair/config.ini`.
+
+Bei stehender Anlage ist das Heizventil zu, damit keine Heizwärme ins
+stehende Gerät geht. Ist es draussen kalt (Witterungsfühler unter
+`off_cold_on` = 3 °C), öffnet es auf 900 wie im Altsystem, damit im
+Register kein Wasser einfriert; zu geht es erst wieder über
+`off_cold_off` = 5 °C. Fällt der Witterungsfühler aus, bleibt es offen
+(der Aussenluftfühler im stehenden Gerät zeigt ein paar Kelvin zu warm). Seit dem
+21.10.2026; vorher stand das Ventil bei «aus» immer auf 900.
 
 Im Normalbetrieb ergibt sich die Betriebsart aus dem Ergebnis der Regelung:
 
