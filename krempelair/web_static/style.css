@@ -161,7 +161,9 @@ main { max-width: 1240px; margin: 0 auto; padding: 0 16px 24px; display: grid; g
 .water .hot { stroke: var(--c-le); } .water .cold { stroke: var(--c-zul); }
 .pump-body { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1.5; }
 .pump-tri { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1.5; }
-.pump.on .pump-tri { fill: var(--ink-2); }
+/* Pumpe meldet Betrieb (LE_PU): grün */
+.pump.on .pump-body { stroke: var(--good); stroke-width: 2; }
+.pump.on .pump-tri { fill: var(--good); stroke: var(--good); }
 .valve-body { fill: var(--surface); stroke: var(--ink-2); stroke-width: 1.5; }
 
 .frost .stem, .sensor .stem { stroke: var(--ink-2); stroke-width: 1.5; }
