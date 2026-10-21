@@ -123,7 +123,10 @@ sudo bash deploy/rollback.sh          # auf dem Pi: zurück zum Altsystem
 ```
 
 `install.sh` ist mehrfach ausführbar; Konfiguration, Geheimnisse und
-Datenbank bleiben erhalten.
+Datenbank bleiben erhalten. Von unterwegs geht es auch über den Rückkanal
+(`deploy/deploy.sh krempelair` mit dem SSH-Eintrag aus docs/fernzugang.md):
+`install.sh` startet den Tunnel erst 5 s nach seinem Ende neu, die Sitzung
+sieht also Prüfung und Rückgabewert noch.
 
 ## Entwicklung ohne Hardware
 

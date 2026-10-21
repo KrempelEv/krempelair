@@ -182,7 +182,8 @@ if [ -f "$ETC/secrets.env" ]; then
     systemctl restart krempelair-bot krempelair-panel
 fi
 systemctl enable krempelair-tunnel >/dev/null
-systemctl restart krempelair-tunnel
+# läuft der Tunnel schon, trägt er womöglich diese Sitzung: Neustart erst am Schluss
+systemctl is-active --quiet krempelair-tunnel || systemctl start krempelair-tunnel
 systemctl enable --now krempelair-backup.timer >/dev/null
 
 echo "7/7 Prüfung"
@@ -210,4 +211,10 @@ if ! systemctl is-active --quiet krempelair-control; then
     false  # löst on_error aus: Altsystem zurück
 fi
 trap - ERR
+# Tunnel 5 s nach dem Ende neu starten (neue Unit, neuer Schlüssel), damit eine
+# Sitzung über den Rückkanal Prüfung und Rückgabewert noch mitbekommt
+if ! systemd-run --quiet --on-active=5 /bin/systemctl restart krempelair-tunnel; then
+    systemctl restart krempelair-tunnel
+fi
+echo "    Tunnel startet in 5 s neu"
 exit $status
