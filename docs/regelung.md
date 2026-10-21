@@ -59,7 +59,7 @@ WRG, dann das Heizregister:
 
 ```
 WRG-Hub bei voller Klappe = η · (ABL − AUL)            η = hx_efficiency (gemessen 0,5)
-Heiz-Hub bei offenem Ventil = heater_rise_stage1/2      (gemessen 12,6 K / 9,9 K)
+Heiz-Hub bei offenem Ventil = heater_rise_stage1/2      (11 K / 8,6 K, siehe unten)
 ```
 
 Weil der WRG-Hub mit dem Temperaturunterschied wächst, rechnet die
@@ -100,6 +100,10 @@ Sprungversuch vom 21.10.2026 (AUL ≈ 10 °C, ABL ≈ 21 °C):
   Zuluft kriecht danach noch minutenlang nach (Wärme im Register). Vorlauf
   und Haltezeit darum mindestens 10 bzw. 15 Minuten (Standard von `steptest`).
 - Das Ventil ist nicht linear: 66 % Hub geben etwa 53 % der Heizleistung.
+  In der Konfiguration steht darum der Hub, der im Arbeitsbereich (60–70 %
+  Ventil) passt: 11 K auf Stufe 1, 8,6 K auf Stufe 2 (gleiches Verhältnis
+  wie 12,6 / 9,9 K bei vollem Hub). Mit 12,6 K startete die Regelung bei
+  62 % statt der nötigen 68 % und sackte 0,8 K ab.
 - WRG voll offen hebt die Zuluft um ≈ 0,5 · (ABL − AUL), Ventilatorwärme
   eingeschlossen; der Anteil der Klappe allein ist ≈ 0,3, der Rest kommt
   auch im Bypass (Leckage, Ventilator).
